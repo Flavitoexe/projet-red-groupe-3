@@ -31,6 +31,7 @@ func (player Character) displayInfo() {
 	fmt.Printf("\t - Niveau : %d\n", player.Level)
 	fmt.Printf("\t - Pv : %d\n", player.Hp)
 	fmt.Printf("\t - Pv Max : %d\n", player.HpMax)
+	//test
 
 }
 
