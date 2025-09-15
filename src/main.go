@@ -6,8 +6,6 @@ import (
 	"slices"
 )
 
-//test
-
 type Character struct {
 	Name      string
 	Class     string
@@ -52,14 +50,13 @@ func (player Character) displayInfo() {
 	fmt.Printf("\t - Niveau : %d\n", player.Level)
 	fmt.Printf("\t - Pv : %d\n", player.Hp)
 	fmt.Printf("\t - Pv Max : %d\n", player.HpMax)
-	//test
 
 }
 
 func (player Character) accesInventory() {
 	fmt.Println("\n=== Inventaire du personnage ===")
 	if len(player.Inventory) == 0 {
-		fmt.Println("\n\n\t Inventaire vide\n\n")
+		fmt.Println("\n\n\t Inventaire du personnage vide\n\n")
 	}
 	for _, items := range player.Inventory {
 		fmt.Printf("\t - %s x %d\n", items.Name, items.Quantity)
@@ -117,4 +114,5 @@ func main() {
 	p1 := Character{}
 	p1.initCharacter()
 	p1.MainMenu()
+	fmt.Println(p1)
 }
