@@ -110,6 +110,15 @@ func (player Character) MainMenu() {
 	}
 }
 
+func (player *Character) isDead() {
+	if player.Hp == 0 {
+		fmt.Println("Tu es mort, repenses-y à deux fois la prochaine fois.\n")
+		fmt.Println("Tu viens de ressusciter, bonne chance à toi !.\n")
+		player.Hp = player.HpMax / 2
+		fmt.Println("Ton nouveau Hp est: %d", player.Hp)
+	}
+}
+
 func main() {
 	p1 := Character{}
 	p1.initCharacter()
