@@ -8,5 +8,5 @@ type Enemy struct {
 }
 
 func (enemy1 *Enemy) initEnemy() {
-	*enemy1 = Enemy{"Recrue", 100, 80, 5}
+	*enemy1 = Enemy{"Recrue", 50, 50, 5}
 }
