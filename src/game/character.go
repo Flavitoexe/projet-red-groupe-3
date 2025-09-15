@@ -47,6 +47,22 @@ func (player *Character) initCharacter() {
 	}
 }
 
+func (player Character) characterCreation() {
+	fmt.Println("Choisissez un nom pour votre perso.")
+	var NameChoice string
+	fmt.Scan(&NameChoice)
+
+	for _, letter := range NameChoice {
+		if (65 <= letter && letter <= 90) || (97 <= letter && letter <= 122) {
+			player.characterCreation()
+
+		} else {
+			fmt.Println("Oups erreur, votre nom n'est pas correcte, veuillez recommencer.")
+		}
+
+	}
+}
+
 func (player Character) displayInfo() {
 	fmt.Println("\n=== Information du personnage ===")
 	fmt.Printf("\t - Nom : %s\n", player.Name)
@@ -123,7 +139,7 @@ func (player Character) MainMenu() {
 func (player *Character) isDead() {
 	if player.Hp == 0 {
 		fmt.Println("\nTu es mort, repenses-y à deux fois la prochaine fois.\n")
-		fmt.Println("Tu viens de ressusciter, bonne chance à toi !.")
+		fmt.Println("Tu viens de ressusciter, bonne chance à toi !")
 		player.Hp = player.HpMax / 2
 		fmt.Printf("Ton nouveau Hp est : %d\n", player.Hp)
 	}
