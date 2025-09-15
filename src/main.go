@@ -23,7 +23,26 @@ type Item struct {
 }
 
 func (player *Character) initCharacter() {
-	*player = Character{"Flavio", "Assassin", 1, 50, 100, []Item{{"Potion de vie", 1}}}
+	*player = Character{
+		Name:  "Momo",
+		Class: "Humain",
+		Level: 1,
+		Hp:    100,
+		HpMax: 150,
+		Inventory: []Item{
+			{"Item", 1},
+			{"Potion de vie", 3},
+			{"Lame secrète", 4},
+			{"Epée classique", 1},
+			{"Epée moyenne", 1},
+			{"Epée plus", 1},
+			{"Bouclier unique", 1},
+			{"Potion force", 2},
+			{"Arc", 1},
+			{"Flèches classiques", 10},
+			{"Flèches empoisonnées", 5},
+		},
+	}
 }
 
 func (player Character) displayInfo() {
