@@ -56,7 +56,7 @@ func (player Character) displayInfo() {
 func (player Character) accesInventory() {
 	fmt.Println("\n=== Inventaire du personnage ===")
 	if len(player.Inventory) == 0 {
-		fmt.Println("\n\n\t Inventaire du personnage vide\n\n")
+		fmt.Println("\n\n\t Inventaire vide\n")
 	}
 	for _, items := range player.Inventory {
 		fmt.Printf("\t - %s x %d\n", items.Name, items.Quantity)
@@ -76,7 +76,7 @@ func (player *Character) takePot() {
 	if player.Hp > player.HpMax {
 		player.Hp = player.HpMax
 	}
-	fmt.Printf("Nouveau Hp : %d\n", player.Hp)
+	fmt.Printf("\nNouveau Hp : %d\n", player.Hp)
 
 	player.Inventory[potIndex].Quantity -= 1
 
@@ -86,7 +86,7 @@ func (player *Character) takePot() {
 }
 
 func (player Character) MainMenu() {
-	for true {
+	for {
 		fmt.Println("\n=== Menu Principal ===")
 		fmt.Printf("\t 1 - Informations du personnage\n")
 		fmt.Printf("\t 2 - Inventaire\n")
@@ -104,7 +104,7 @@ func (player Character) MainMenu() {
 			os.Exit(02)
 			return
 		default:
-			fmt.Println("Erreur : Choix non valide\n")
+			fmt.Println("Erreur : Choix non valide")
 
 		}
 	}
@@ -112,10 +112,10 @@ func (player Character) MainMenu() {
 
 func (player *Character) isDead() {
 	if player.Hp == 0 {
-		fmt.Println("Tu es mort, repenses-y à deux fois la prochaine fois.\n")
-		fmt.Println("Tu viens de ressusciter, bonne chance à toi !.\n")
+		fmt.Println("\nTu es mort, repenses-y à deux fois la prochaine fois.\n")
+		fmt.Println("Tu viens de ressusciter, bonne chance à toi !.")
 		player.Hp = player.HpMax / 2
-		fmt.Println("Ton nouveau Hp est: %d", player.Hp)
+		fmt.Printf("Ton nouveau Hp est : %d\n", player.Hp)
 	}
 }
 
@@ -123,5 +123,4 @@ func main() {
 	p1 := Character{}
 	p1.initCharacter()
 	p1.MainMenu()
-	fmt.Println(p1)
 }
