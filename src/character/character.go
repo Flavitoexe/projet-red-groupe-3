@@ -1,4 +1,4 @@
-package main
+package character
 
 import (
 	"fmt"
@@ -107,6 +107,15 @@ func (player Character) MainMenu() {
 			fmt.Println("Erreur : Choix non valide\n")
 
 		}
+	}
+}
+
+func (player *Character) isDead() {
+	if player.Hp == 0 {
+		fmt.Println("Tu es mort, repenses-y à deux fois la prochaine fois.\n")
+		fmt.Println("Tu viens de ressusciter, bonne chance à toi !.\n")
+		player.Hp = player.HpMax / 2
+		fmt.Println("Ton nouveau Hp est: %d", player.Hp)
 	}
 }
 
