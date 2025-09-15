@@ -1,4 +1,4 @@
-package combat
+package game
 
 import (
 	"fmt"
@@ -25,7 +25,10 @@ func (character character.Character) characterTurn(enemy character.Enemy) {
 		&enemy.Hp -= character.Damage
 		fmt.Printf("%s a infligé %d dégats à %s !", character.Name, character.Damage, enemy.Name)
 	case 2:
-		character.accesInventory()
+		character.AccesInventory()
+		// fmt.Println("Voulez vous utiliser un objet ?\n\t0 : Non\n\t1 : Oui")
+		// var userChoice2 int
+
 	case 3:
 		character.MainMenu()
 	}

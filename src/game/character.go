@@ -1,4 +1,4 @@
-package character
+package game
 
 import (
 	"fmt"
@@ -53,14 +53,20 @@ func (player Character) displayInfo() {
 
 }
 
-func (player Character) accesInventory() {
+func (player Character) AccesInventory() {
 	fmt.Println("\n=== Inventaire du personnage ===")
+
 	if len(player.Inventory) == 0 {
 		fmt.Println("\n\n\t Inventaire vide\n")
 	}
+
 	for _, items := range player.Inventory {
 		fmt.Printf("\t - %s x %d\n", items.Name, items.Quantity)
 	}
+
+	// var userChoice int
+	// fmt.Println("Voulez vous utiliser un objet ?\n\t1 - 9 : Utilise l'objet\n\t0 : Quitter l'inventaire")
+	// fmt.Scan(&userChoice)
 }
 
 func (player *Character) takePot() {
@@ -76,7 +82,7 @@ func (player *Character) takePot() {
 	if player.Hp > player.HpMax {
 		player.Hp = player.HpMax
 	}
-	fmt.Printf("\nNouveau Hp : %d\n", player.Hp)
+	fmt.Printf("Vous utilisez une potion de soin.\nNouveau Hp : %d\n", player.Hp)
 
 	player.Inventory[potIndex].Quantity -= 1
 
@@ -99,7 +105,7 @@ func (player Character) MainMenu() {
 		case 1:
 			player.displayInfo()
 		case 2:
-			player.accesInventory()
+			player.AccesInventory()
 		case 0:
 			os.Exit(02)
 			return
