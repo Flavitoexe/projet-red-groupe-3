@@ -13,6 +13,7 @@ type Character struct {
 	Hp        int
 	HpMax     int
 	Inventory []Item
+	Skill     []string
 }
 
 type Item struct {
@@ -40,6 +41,7 @@ func (player *Character) initCharacter() {
 			{"Flèches classiques", 10},
 			{"Flèches empoisonnées", 5},
 		},
+		Skill: []string{"Coup de poing"},
 	}
 }
 
@@ -116,6 +118,16 @@ func (player *Character) isDead() {
 		fmt.Println("Tu viens de ressusciter, bonne chance à toi !.\n")
 		player.Hp = player.HpMax / 2
 		fmt.Println("Ton nouveau Hp est: %d", player.Hp)
+	}
+}
+
+func (player *Character) spellBook() {
+	for _, element := range player.Skill {
+		if !(element == "Boule de feu") {
+			player.Skill = append(player.Skill, "Boule de feu")
+		} else {
+			continue
+		}
 	}
 }
 
