@@ -13,6 +13,7 @@ type Character struct {
 	Hp        int
 	HpMax     int
 	Inventory []Item
+	Damage    int
 	Skill     []string
 }
 
@@ -41,7 +42,8 @@ func (player *Character) initCharacter() {
 			{"Flèches classiques", 10},
 			{"Flèches empoisonnées", 5},
 		},
-		Skill: []string{"Coup de poing"},
+		Damage: 5,
+		Skill:  []string{"Coup de poing"},
 	}
 }
 
