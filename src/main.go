@@ -6,6 +6,8 @@ import (
 	"slices"
 )
 
+//test
+
 type Character struct {
 	Name      string
 	Class     string
