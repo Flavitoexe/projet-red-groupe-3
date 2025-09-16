@@ -25,9 +25,9 @@ type Item struct {
 	Quantity int
 }
 
-<<<<<<< HEAD
 func (player *Character) initCharacter() {
-=======
+}
+
 type Equipment struct {
 	Casque string
 	Body   string
@@ -248,23 +248,41 @@ func (player Character) MainMenu() {
 		fmt.Printf("\t 2 - Inventaire\n")
 		fmt.Printf("\t 0 - Quitter\n")
 
-		userChoice := readInt("à vous: ")
+		var userChoice int
+		var validChoice bool
 
-		switch userChoice {
-		case 1:
-			player.displayInfo()
-		case 2:
-			player.AccesInventory()
-		case 0:
-			fmt.Println("Merci au revoir.")
-			return
-		default:
-<<<<<<< HEAD
-			fmt.Println("Votre choix n'est pas valide.")
-=======
-			fmt.Println("Erreur : Choix non valide")
->>>>>>> 2cd91c546651bba1ee223d3b3df2e7a88909edb6
+		for !validChoice {
+			fmt.Println("\nQue souhaitez vous faire ?")
+			fmt.Scan(userChoice)
+
+			switch userChoice {
+			case 1:
+				player.displayInfo()
+				validChoice = true
+			case 2:
+				player.AccesInventory()
+				validChoice = true
+			case 0:
+				fmt.Println("\nVous quittez l'aventure.\nMerci pour votre participation !")
+				os.Exit(02)
+			default:
+				fmt.Println("Choix invalide, veuillez réessayer :")
+			}
 		}
+
+		// userChoice := readInt("à vous: ")
+
+		// switch userChoice {
+		// case 1:
+		// 	player.displayInfo()
+		// case 2:
+		// 	player.AccesInventory()
+		// case 0:
+		// 	fmt.Println("Merci au revoir.")
+		// 	return
+		// default:
+		// 	fmt.Println("Votre choix n'est pas valide.")
+		// }
 	}
 }
 
