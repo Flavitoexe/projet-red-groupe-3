@@ -55,7 +55,6 @@ func TrainingFight(player Character, enemy Enemy) {
 			cptTour++
 		}
 	}
-
 }
 
 // func main() {
