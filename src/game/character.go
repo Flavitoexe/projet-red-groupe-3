@@ -25,7 +25,48 @@ type Item struct {
 	Quantity int
 }
 
+<<<<<<< HEAD
 func (player *Character) initCharacter() {
+=======
+type Equipment struct {
+	Casque string
+	Body   string
+	Foot   string
+}
+
+var class1 Character = Character{
+	Name:      "",
+	Class:     "Humains",
+	Level:     1,
+	Hp:        50,
+	HpMax:     100,
+	Inventory: []Item{},
+	Damage:    10,
+	Skill:     []string{"Coup de poing"},
+}
+var class2 Character = Character{
+	Name:      "",
+	Class:     "Elfes",
+	Level:     1,
+	Hp:        40,
+	HpMax:     80,
+	Inventory: []Item{},
+	Damage:    10,
+	Skill:     []string{"Coup de poing"},
+}
+var class3 Character = Character{
+	Name:      "",
+	Class:     "Nains",
+	Level:     1,
+	Hp:        60,
+	HpMax:     120,
+	Inventory: []Item{},
+	Damage:    10,
+	Skill:     []string{"Coup de poing"},
+}
+
+func (player *Character) InitCharacter() {
+>>>>>>> 2cd91c546651bba1ee223d3b3df2e7a88909edb6
 	*player = Character{
 		Name:  "",
 		Class: "Humain",
@@ -49,10 +90,43 @@ func (player *Character) initCharacter() {
 		Skill:  []string{"Coup de poing"}}
 }
 
-func (player *Character) characterCreation() {
+func (player *Character) classChoice() {
+	var validClass bool
+	for !validClass {
+
+		fmt.Println("Voici les différentes classes : ")
+		fmt.Printf("\nClasse 1 : %s", class1.Class)
+		fmt.Printf("\n\tPv : %d\n\tDégats : %d\n\tCapacités : %s", class1.HpMax, class1.Damage, class1.Skill[0])
+		fmt.Printf("\nClasse 2 : %s", class2.Class)
+		fmt.Printf("\n\tPv : %d\n\tDégats : %d\n\tCapacités : %s", class2.HpMax, class2.Damage, class2.Skill[0])
+		fmt.Printf("\nClasse 3 : %s ", class3.Class)
+		fmt.Printf("\n\tPv : %d\n\tDégats : %d\n\tCapacités : %s\n", class3.HpMax, class3.Damage, class3.Skill[0])
+
+		var classChoice int
+		fmt.Println("\nFaites votre choix (1, 2 ou 3): ")
+		fmt.Scan(&classChoice)
+
+		switch classChoice {
+		case 1:
+			*player = class1
+			validClass = true
+		case 2:
+			*player = class2
+			validClass = true
+		case 3:
+			*player = class3
+			validClass = true
+		default:
+			fmt.Println("Choix invalide, veuillez réessayer.\n")
+		}
+	}
+}
+
+func (player *Character) CharacterCreation() {
+	player.classChoice()
 	var validName bool
 	for !validName {
-		fmt.Println("Choisissez un nom pour votre perso.")
+		fmt.Println("Choisissez un nom pour votre perso : ")
 		var nameChoice string = ""
 		fmt.Scan(&nameChoice)
 
@@ -103,11 +177,11 @@ func (player Character) AccesInventory() {
 	}
 
 	var userChoice int
-	fmt.Println("Voulez vous utiliser un objet ?\n\t1 - 9 : Utilise l'objet\n\t0 : Quitter l'inventaire")
+	fmt.Println("Voulez vous utiliser un objet ?\n\t1 - 2 : Consommer la potion\n\t3 - 4 : Sélectionner le type de flèche\n\t0 : Quitter l'inventaire")
 	fmt.Scan(&userChoice)
 }
 
-func (player *Character) takePot() {
+func (player *Character) takeHealthPot() {
 	potIndex := slices.IndexFunc(player.Inventory, func(items Item) bool {
 		return (items.Name == "Potion de vie" && items.Quantity > 0)
 	})
@@ -170,7 +244,11 @@ func (player Character) MainMenu() {
 			fmt.Println("Merci au revoir.")
 			return
 		default:
+<<<<<<< HEAD
 			fmt.Println("Votre choix n'est pas valide.")
+=======
+			fmt.Println("Erreur : Choix non valide")
+>>>>>>> 2cd91c546651bba1ee223d3b3df2e7a88909edb6
 		}
 	}
 }
@@ -192,12 +270,4 @@ func (player *Character) spellBook() {
 			continue
 		}
 	}
-}
-
-func main() {
-	p1 := Character{}
-	p1.initCharacter()
-	p1.characterCreation()
-	p1.displayInfo()
-	p1.MainMenu()
 }
