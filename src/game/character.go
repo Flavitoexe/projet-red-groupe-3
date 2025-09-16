@@ -28,61 +28,75 @@ type Equipment struct {
 	Foot   string
 }
 
+var basicInventory []Item = []Item{
+	{"Potion de vie", 3},
+	{"Potion de force", 2},
+	{"Flèches classiques", 10},
+	{"Flèches empoisonnées", 5},
+	{"Lame secrète", 4},
+	{"Epée classique", 1},
+	{"Epée moyenne", 1},
+	{"Epée plus", 1},
+	{"Bouclier unique", 1},
+	{"Arc", 1},
+}
+
 var class1 Character = Character{
 	Name:      "",
 	Class:     "Humains",
 	Level:     1,
 	Hp:        50,
 	HpMax:     100,
-	Inventory: []Item{},
+	Inventory: basicInventory,
 	Damage:    10,
 	Skill:     []string{"Coup de poing"},
 }
+
 var class2 Character = Character{
 	Name:      "",
 	Class:     "Elfes",
 	Level:     1,
 	Hp:        40,
 	HpMax:     80,
-	Inventory: []Item{},
+	Inventory: basicInventory,
 	Damage:    10,
 	Skill:     []string{"Coup de poing"},
 }
+
 var class3 Character = Character{
 	Name:      "",
 	Class:     "Nains",
 	Level:     1,
 	Hp:        60,
 	HpMax:     120,
-	Inventory: []Item{},
+	Inventory: basicInventory,
 	Damage:    10,
 	Skill:     []string{"Coup de poing"},
 }
 
-func (player *Character) InitCharacter() {
-	*player = Character{
-		Name:  "",
-		Class: "Humain",
-		Level: 1,
-		Hp:    100,
-		HpMax: 150,
-		Inventory: []Item{
-			{"Item", 1},
-			{"Potion de vie", 3},
-			{"Lame secrète", 4},
-			{"Epée classique", 1},
-			{"Epée moyenne", 1},
-			{"Epée plus", 1},
-			{"Bouclier unique", 1},
-			{"Potion force", 2},
-			{"Arc", 1},
-			{"Flèches classiques", 10},
-			{"Flèches empoisonnées", 5},
-		},
-		Damage: 5,
-		Skill:  []string{"Coup de poing"},
-	}
-}
+// func (player *Character) InitCharacter() {
+// 	*player = Character{
+// 		Name:  "",
+// 		Class: "Humain",
+// 		Level: 1,
+// 		Hp:    100,
+// 		HpMax: 150,
+// 		Inventory: []Item{
+// 			{"Potion de vie", 3},
+// 			{"Potion de force", 2},
+// 			{"Flèches classiques", 10},
+// 			{"Flèches empoisonnées", 5},
+// 			{"Lame secrète", 4},
+// 			{"Epée classique", 1},
+// 			{"Epée moyenne", 1},
+// 			{"Epée plus", 1},
+// 			{"Bouclier unique", 1},
+// 			{"Arc", 1},
+// 		},
+// 		Damage: 5,
+// 		Skill:  []string{"Coup de poing"},
+// 	}
+// }
 
 func (player *Character) classChoice() {
 	var validClass bool
@@ -163,7 +177,8 @@ func (player Character) AccesInventory() {
 	fmt.Println("\n=== Inventaire du personnage ===")
 
 	if len(player.Inventory) == 0 {
-		fmt.Println("\n\n\t Inventaire vide\n")
+		fmt.Println("\n\n\t Inventaire vide\n\n")
+		return
 	}
 
 	for _, items := range player.Inventory {
@@ -171,7 +186,7 @@ func (player Character) AccesInventory() {
 	}
 
 	var userChoice int
-	fmt.Println("Voulez vous utiliser un objet ?\n\t1 - 2 : Consommer la potion\n\t3 - 4 : Sélectionner le type de flèche\n\t0 : Quitter l'inventaire")
+	fmt.Println("\nVoulez vous utiliser un objet ?\n\t1 - 2 : Consommer la potion\n\t3 - 4 : Sélectionner le type de flèche\n\t0 : Quitter l'inventaire")
 	fmt.Scan(&userChoice)
 }
 
