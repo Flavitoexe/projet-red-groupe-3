@@ -1,9 +1,15 @@
 package main
 
-import "character"
+import (
+	character "game/character.go"
+	enemies "game/enemies.go"
+)
 
 func main() {
 	p1 := character.Character{}
 	p1.initCharacter()
-	p1.AccesInventory()
+	e1 := enemies.Enemy{}
+	e1.initEnemy()
+	p1.characterCreation()
+	p1.MainMenu()
 }
