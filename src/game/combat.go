@@ -1,11 +1,11 @@
 package game
 
 import (
+	"character"
 	"fmt"
-	"game/character"
 )
 
-func (enemy *character.Enemy) enemyPattern(player character.Character, turn int) {
+func enemyPattern(player character.Character, enemy Enemy, turn int) {
 	if turn%3 == 0 {
 		*player.Hp -= 2 * enemy.Damage
 	} else {
@@ -14,7 +14,7 @@ func (enemy *character.Enemy) enemyPattern(player character.Character, turn int)
 	}
 }
 
-func (character *character.Character) characterTurn(enemy character.Enemy) {
+func characterTurn(enemy character.Enemy) {
 	fmt.Println("\n=== Menu Combat ===\n")
 	fmt.Println("\t- Attaquer\t 1")
 	fmt.Println("\t- Inventaire\t 2")
@@ -37,15 +37,16 @@ func (character *character.Character) characterTurn(enemy character.Enemy) {
 	}
 }
 
-func (player *Character) trainingFight(enemy Enemy) {
+func trainingFight(player Character, enemy Enemy) {
 	fmt.Printf("\nVous rencontrez %s et il vous provoque.\n\tDéfoncez le.", enemy.Name)
 	cptTour := 1
+
 	for character.Hp > 0 && enemy.Hp > 0 {
 		fmt.Printf("\n=== Tour %d ===\n", cptTour)
-		player.characterTurn(enemy)
+		characterTurn(enemy)
 		if enemy.Hp > 0 {
-			enemy.enemyPattern(player, cptTour)
-			cpt++
+			enemyPattern(player, enemy, cptTour)
+			cptTour++
 		}
 	}
 
