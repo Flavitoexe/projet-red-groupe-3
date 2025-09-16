@@ -41,7 +41,7 @@ func (player *Character) trainingFight(enemy Enemy) {
 	fmt.Printf("\nVous rencontrez %s et il vous provoque.\n\tDéfoncez le.", enemy.Name)
 	cptTour := 1
 	for character.Hp > 0 && enemy.Hp > 0 {
-		fmt.Println("\n=== Tour 1 ===\n")
+		fmt.Printf("\n=== Tour %d ===\n", cptTour)
 		player.characterTurn(enemy)
 		if enemy.Hp > 0 {
 			enemy.enemyPattern(player, cptTour)
