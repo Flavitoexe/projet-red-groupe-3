@@ -1,9 +1,12 @@
 package game
 
 import (
+	"bufio"
 	"fmt"
 	"os"
 	"slices"
+	"strconv"
+	"strings"
 )
 
 type Character struct {
@@ -22,6 +25,9 @@ type Item struct {
 	Quantity int
 }
 
+<<<<<<< HEAD
+func (player *Character) initCharacter() {
+=======
 type Equipment struct {
 	Casque string
 	Body   string
@@ -212,15 +218,37 @@ func (player *Character) takeHealthPot() {
 	}
 }
 
+func readInt(prompt string) int {
+	reader := bufio.NewReader(os.Stdin)
+	for {
+		fmt.Print(prompt)
+		line, err := reader.ReadString('\n')
+		if err != nil {
+			fmt.Println("Erreur de lecture, réessayez.")
+			continue
+		}
+		line = strings.TrimSpace(line)
+		if line == "" {
+			fmt.Println("Veuillez entrer un nombre.")
+			continue
+		}
+		n, err := strconv.Atoi(line)
+		if err != nil {
+			fmt.Println("Entrée invalide — tapez un nombre (ex: 1, 2, 0).")
+			continue
+		}
+		return n
+	}
+}
+
 func (player Character) MainMenu() {
 	for {
 		fmt.Println("\n=== Menu Principal ===")
 		fmt.Printf("\t 1 - Informations du personnage\n")
 		fmt.Printf("\t 2 - Inventaire\n")
 		fmt.Printf("\t 0 - Quitter\n")
-		fmt.Println("\nSelectionner un choix : ")
-		var userChoice int
-		fmt.Scan(&userChoice)
+
+		userChoice := readInt("à vous: ")
 
 		switch userChoice {
 		case 1:
@@ -228,10 +256,14 @@ func (player Character) MainMenu() {
 		case 2:
 			player.AccesInventory()
 		case 0:
-			os.Exit(02)
+			fmt.Println("Merci au revoir.")
 			return
 		default:
+<<<<<<< HEAD
+			fmt.Println("Votre choix n'est pas valide.")
+=======
 			fmt.Println("Erreur : Choix non valide")
+>>>>>>> 2cd91c546651bba1ee223d3b3df2e7a88909edb6
 		}
 	}
 }
