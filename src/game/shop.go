@@ -1,4 +1,4 @@
-package main
+package game
 
 import (
 	"fmt"
@@ -26,8 +26,4 @@ func addInventory() {
 }
 func removeInventor() {
 
-}
-
-func main() {
-	accessMarchand()
 }

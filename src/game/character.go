@@ -22,20 +22,12 @@ type Item struct {
 	Quantity int
 }
 
-<<<<<<< HEAD
 type Equipment struct {
 	Casque string
-	Body string
-	Foot string 
+	Body   string
+	Foot   string
 }
 
-class1 := {
-	Name: "",
-	Class:"Humains" ,
-	Level : 1,
-	Hp : 50,
-	HpMax: 100 ,
-=======
 var class1 Character = Character{
 	Name:      "",
 	Class:     "Humains",
