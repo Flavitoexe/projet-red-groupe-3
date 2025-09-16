@@ -7,6 +7,7 @@ import (
 	"slices"
 	"strconv"
 	"strings"
+	"time"
 )
 
 type Character struct {
@@ -18,14 +19,13 @@ type Character struct {
 	Inventory []Item
 	Damage    int
 	Skill     []string
+	BowState  int
 }
 
 type Item struct {
 	Name     string
 	Quantity int
-}
-
-func (player *Character) initCharacter() {
+	Tag      string
 }
 
 type Equipment struct {
@@ -35,16 +35,16 @@ type Equipment struct {
 }
 
 var basicInventory []Item = []Item{
-	{"Potion de vie", 3},
-	{"Potion de force", 2},
-	{"Flèches classiques", 10},
-	{"Flèches empoisonnées", 5},
-	{"Lame secrète", 4},
-	{"Epée classique", 1},
-	{"Epée moyenne", 1},
-	{"Epée plus", 1},
-	{"Bouclier unique", 1},
-	{"Arc", 1},
+	{"Lame secrète", 4, "Arme"},
+	{"Epée classique", 1, "Arme"},
+	{"Epée moyenne", 0, "Arme"},
+	{"Epée plus", 0, "Arme"},
+	{"Arc", 1, "Arme"},
+	{"Bouclier unique", 1, "Armure"},
+	{"Potion de vie", 1, "Cons"},
+	{"Potion de force", 2, "Cons"},
+	{"Flèches classiques", 10, "Cons"},
+	{"Flèches empoisonnées", 0, "Cons"},
 }
 
 var class1 Character = Character{
@@ -131,7 +131,7 @@ func (player *Character) classChoice() {
 			*player = class3
 			validClass = true
 		default:
-			fmt.Println("Choix invalide, veuillez réessayer.\n")
+			fmt.Println("Choix invalide, veuillez réessayer :")
 		}
 	}
 }
@@ -174,48 +174,10 @@ func (player Character) displayInfo() {
 	fmt.Printf("\t - Nom : %s\n", player.Name)
 	fmt.Printf("\t - Classe : %s\n", player.Class)
 	fmt.Printf("\t - Niveau : %d\n", player.Level)
-	fmt.Printf("\t - Pv : %d\n", player.Hp)
-	fmt.Printf("\t - Pv Max : %d\n", player.HpMax)
+	fmt.Printf("\t - Points de vie actuels : %d\n", player.Hp)
+	fmt.Printf("\t - Points de vie max : %d\n", player.HpMax)
+	fmt.Printf("\t - Dégats : %d\n", player.Damage)
 
-}
-
-func (player Character) AccesInventory() {
-	fmt.Println("\n=== Inventaire du personnage ===")
-
-	if len(player.Inventory) == 0 {
-		fmt.Println("\n\n\t Inventaire vide\n\n")
-		return
-	}
-
-	for _, items := range player.Inventory {
-		fmt.Printf("\t - %s x %d\n", items.Name, items.Quantity)
-	}
-
-	var userChoice int
-	fmt.Println("\nVoulez vous utiliser un objet ?\n\t1 - 2 : Consommer la potion\n\t3 - 4 : Sélectionner le type de flèche\n\t0 : Quitter l'inventaire")
-	fmt.Scan(&userChoice)
-}
-
-func (player *Character) takeHealthPot() {
-	potIndex := slices.IndexFunc(player.Inventory, func(items Item) bool {
-		return (items.Name == "Potion de vie" && items.Quantity > 0)
-	})
-	if potIndex == -1 {
-		fmt.Println("Pas de Potion de vie")
-		return
-	}
-
-	player.Hp += 50
-	if player.Hp > player.HpMax {
-		player.Hp = player.HpMax
-	}
-	fmt.Printf("Vous utilisez une potion de soin.\nNouveau Hp : %d\n", player.Hp)
-
-	player.Inventory[potIndex].Quantity -= 1
-
-	if player.Inventory[potIndex].Quantity <= 0 {
-		player.Inventory = append(player.Inventory[:potIndex], player.Inventory[potIndex+1:]...)
-	}
 }
 
 func readInt(prompt string) int {
@@ -229,17 +191,175 @@ func readInt(prompt string) int {
 		}
 		line = strings.TrimSpace(line)
 		if line == "" {
-			fmt.Println("Veuillez entrer un nombre.")
+			fmt.Println("Choix invalide, veuillez réessayer (Tapez 0, 1 ou 2).")
 			continue
 		}
 		n, err := strconv.Atoi(line)
 		if err != nil {
-			fmt.Println("Entrée invalide — tapez un nombre (ex: 1, 2, 0).")
+			fmt.Println("Entrée invalide, veuillez taper un nombre (ex: 1, 2, 0).")
 			continue
 		}
 		return n
 	}
 }
+
+func addInventory() {
+
+}
+
+func removeInventor() {
+
+}
+
+func (player Character) AccesInventory() {
+	fmt.Println("\n=== Inventaire du personnage ===")
+
+	if len(player.Inventory) == 0 {
+		fmt.Println("\n\n\t Inventaire vide\n\n")
+		return
+	}
+
+	fmt.Println("\n\t1 == Armes ==\n\t2 == Armure ==\n\t3 == Consommables ==\n")
+	userChoice := readInt("\nQue souhaitez vous voir ? ")
+
+	switch userChoice {
+
+	case 1:
+		fmt.Println("== Armes ==")
+		for _, weapon := range player.Inventory {
+			if weapon.Tag != "Arme" || weapon.Quantity == 0 {
+				continue
+			} else if weapon.Tag == "Arme" {
+				fmt.Printf("\t - %s\n", weapon.Name)
+			}
+		}
+	case 2:
+		fmt.Println("== Armures ==")
+		for _, armor := range player.Inventory {
+			if armor.Tag != "Armure" || armor.Quantity == 0 {
+				continue
+			} else if armor.Tag == "Armure" {
+				fmt.Printf("\t - %s\n", armor.Name)
+			}
+		}
+	case 3:
+		fmt.Println("== Consommables ==")
+		for _, cons := range player.Inventory {
+			if cons.Tag != "Cons" {
+				continue
+			} else if cons.Tag == "Cons" {
+				fmt.Printf("\t - %s x %d\n", cons.Name, cons.Quantity)
+			}
+		}
+
+		fmt.Println("\nVoulez vous utiliser un objet ?\n(0 pour sortir, 1 - 2 pour consommer une potion, 3 - 4 pour seléctionner un type de flèche)\n")
+		userChoice2 := readInt("Votre choix : ")
+
+		switch userChoice2 {
+		case 0:
+			player.AccesInventory()
+		case 1:
+			player.takeHealthPot()
+		case 2:
+			player.takeStrenghtPot()
+		case 3:
+			if player.Inventory[8].Quantity <= 0 {
+				fmt.Print("Plus de flèches normales. Allez en acheter au marchand.\n")
+			} else {
+				fmt.Printf("Vous équipez les flèches normales. (%d restantes)\n", player.Inventory[8].Quantity)
+				player.BowState = 0
+			}
+		case 4:
+			if player.Inventory[9].Quantity <= 0 {
+				fmt.Println("Plus de flèches empoisonnées. Allez en acheter au marchand.\n")
+			} else {
+				fmt.Printf("Vous équipez les flèches empoisonnées. (%d restantes)\n", player.Inventory[9].Quantity)
+				player.BowState = 1
+			}
+		}
+	}
+	// for i := 0; i < len(player.Inventory); i++ {
+
+	// }
+	// for _, items := range player.Inventory {
+	// 	if items.Quantity == 0 {
+	// 		continue
+	// 	} else {
+	// 		fmt.Printf("\t - %s x %d\n", items.Name, items.Quantity)
+	// 	}
+	// }
+}
+
+func (player *Character) takeHealthPot() {
+	potIndex := slices.IndexFunc(player.Inventory, func(items Item) bool {
+		return (items.Name == "Potion de vie" && items.Quantity > 0)
+	})
+	if potIndex == -1 {
+		fmt.Println("Plus de Potion de vie. Allez en acheter au marchand.")
+		return
+	}
+
+	player.Hp += 50
+	if player.Hp > player.HpMax {
+		player.Hp = player.HpMax
+	}
+	fmt.Printf("Vous utilisez une potion de soin.\nNouveau Hp : %d\n", player.Hp)
+
+	player.Inventory[potIndex].Quantity -= 1
+
+	// if player.Inventory[potIndex].Quantity <= 0 {
+	// 	player.Inventory = append(player.Inventory[:potIndex], player.Inventory[potIndex+1:]...)
+	// }
+}
+
+func (player *Character) takeStrenghtPot() {
+	// potIndex := slices.IndexFunc(player.Inventory, func(items Item) bool {
+	// 	return (items.Name == "Potion de force" && items.Quantity > 0)
+	// })
+	if player.Inventory[7].Quantity == 0 {
+		fmt.Println("Plus de Potion de force. Allez en acheter au marchand.")
+		return
+	}
+
+	newDamage := &player.Damage
+	*newDamage += 10
+	fmt.Printf("Vous utilisez une potion de force d'une durée de 2 minutes.\nNouveaux dégats : %d\n", player.Damage)
+
+	go func() {
+		time.Sleep(2 * time.Minute)
+		player.Damage -= 10
+		fmt.Printf("\nL'effet de la potion de force s'est dissipé.\nNouveaux dégats : %d\n", player.Damage)
+	}()
+
+	player.Inventory[7].Quantity -= 1
+
+	// if player.Inventory[potIndex].Quantity <= 0 {
+	// 	player.Inventory = append(player.Inventory[:potIndex], player.Inventory[potIndex+1:]...)
+	// }
+}
+
+// func readInt(prompt string) int {
+// 	reader := bufio.NewReader(os.Stdin)
+// 	for {
+// 		fmt.Print(prompt)
+// 		line, err := reader.ReadString('\n')
+// 		if err != nil {
+// 			fmt.Println("Erreur de lecture, réessayez.")
+// 			continue
+// 		}
+// 		line = strings.TrimSpace(line)
+// 		if line == "" {
+// 			fmt.Println("Choix invalide, veuillez réessayer (Tapez 0, 1 ou 2).")
+// 			continue
+// 		}
+// 		n, err := strconv.Atoi(line)
+// 		if err != nil {
+// 			fmt.Println("Entrée invalide, veuillez taper un nombre (ex: 1, 2, 0).")
+// 			continue
+// 		}
+// 		return n
+// 	}
+// }
 
 func (player Character) MainMenu() {
 	for {
@@ -248,41 +368,41 @@ func (player Character) MainMenu() {
 		fmt.Printf("\t 2 - Inventaire\n")
 		fmt.Printf("\t 0 - Quitter\n")
 
-		var userChoice int
-		var validChoice bool
+		// var validChoice bool
 
-		for !validChoice {
-			fmt.Println("\nQue souhaitez vous faire ?")
-			fmt.Scan(userChoice)
+		// for !validChoice {
+		// 	fmt.Println("\nQue souhaitez vous faire ?")
+		// 	var userChoice int
+		// 	fmt.Scan(userChoice)
 
-			switch userChoice {
-			case 1:
-				player.displayInfo()
-				validChoice = true
-			case 2:
-				player.AccesInventory()
-				validChoice = true
-			case 0:
-				fmt.Println("\nVous quittez l'aventure.\nMerci pour votre participation !")
-				os.Exit(02)
-			default:
-				fmt.Println("Choix invalide, veuillez réessayer :")
-			}
-		}
-
-		// userChoice := readInt("à vous: ")
-
-		// switch userChoice {
-		// case 1:
-		// 	player.displayInfo()
-		// case 2:
-		// 	player.AccesInventory()
-		// case 0:
-		// 	fmt.Println("Merci au revoir.")
-		// 	return
-		// default:
-		// 	fmt.Println("Votre choix n'est pas valide.")
+		// 	switch userChoice {
+		// 	case 1:
+		// 		player.displayInfo()
+		// 		validChoice = true
+		// 	case 2:
+		// 		player.AccesInventory()
+		// 		validChoice = true
+		// 	case 0:
+		// 		fmt.Println("\nVous quittez l'aventure.\nMerci pour votre participation !")
+		// 		os.Exit(02)
+		// 	default:
+		// 		fmt.Println("Choix invalide, veuillez réessayer :")
+		// 	}
 		// }
+
+		userChoice := readInt("\nQue souhaitez vous faire ? ")
+
+		switch userChoice {
+		case 1:
+			player.displayInfo()
+		case 2:
+			player.AccesInventory()
+		case 0:
+			fmt.Println("\nVous quittez l'aventure.\nMerci pour votre participation !")
+			return
+		default:
+			fmt.Println("Choix invalide, veuillez réessayer (Tapez 0, 1 ou 2).")
+		}
 	}
 }
 

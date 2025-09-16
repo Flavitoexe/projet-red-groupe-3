@@ -10,4 +10,5 @@ func main() {
 	// e1 := game.Enemy{}
 	// e1.InitEnemy()
 	// game.TrainingFight(p1, e1)
+	// game.AccessShop()
 }

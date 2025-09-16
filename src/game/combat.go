@@ -46,6 +46,7 @@ func TrainingFight(player Character, enemy Enemy) {
 	cptTour := 1
 
 	for player.Hp > 0 && enemy.Hp > 0 {
+		player.isDead()
 		fmt.Printf("\n=== Tour %d ===\n", cptTour)
 		fmt.Printf("\nIl vous reste %d/%d point de vies\n", player.Hp, player.HpMax)
 		fmt.Printf("Il reste %d/%d point de vies à %s\n", enemy.Hp, enemy.MaxHp, enemy.Name)
