@@ -21,13 +21,35 @@ type Item struct {
 	Quantity int
 }
 
+class1 := {
+	Name: "",
+	Class:"Humains" ,
+	Level : 1,
+	Hp : 50,
+	HpMax: 100 ,
+	Skill: []string{"Coup de poing"},
+}
+class2 := {
+	Name: "",
+	Class:"Elfes" ,
+	Level : 1,
+	Hp : 40,
+	HpMax: 80 ,
+	Skill: []string{"Coup de poing"},
+}
+class3 := {
+	Name: "",
+	Class:"Nains" ,
+	Level : 1,
+	Hp : 60,
+	HpMax: 120 ,
+	Skill: []string{"Coup de poing"},
+}
+
 func (player *Character) initCharacter() {
 	*player = Character{
-		Name:  "Momo",
-		Class: "Humain",
-		Level: 1,
-		Hp:    100,
-		HpMax: 150,
+		fmt.Println("Choisissez votre personnage: tapez 1, 2 ou 3.")
+
 		Inventory: []Item{
 			{"Item", 1},
 			{"Potion de vie", 3},
@@ -82,9 +104,9 @@ func (player Character) AccesInventory() {
 		fmt.Printf("\t - %s x %d\n", items.Name, items.Quantity)
 	}
 
-	// var userChoice int
-	// fmt.Println("Voulez vous utiliser un objet ?\n\t1 - 9 : Utilise l'objet\n\t0 : Quitter l'inventaire")
-	// fmt.Scan(&userChoice)
+	var userChoice int
+	fmt.Println("Voulez vous utiliser un objet ?\n\t1 - 9 : Utilise l'objet\n\t0 : Quitter l'inventaire")
+	fmt.Scan(&userChoice)
 }
 
 func (player *Character) takePot() {
@@ -156,5 +178,6 @@ func (player *Character) spellBook() {
 func main() {
 	p1 := Character{}
 	p1.initCharacter()
-	p1.MainMenu()
+	p1.characterCreation()
+	p1.displayInfo()
 }
