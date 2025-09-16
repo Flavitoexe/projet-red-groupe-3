@@ -22,6 +22,12 @@ type Item struct {
 	Quantity int
 }
 
+type Equipment struct {
+	Casque string
+	Body string
+	Foot string 
+}
+
 class1 := {
 	Name: "",
 	Class:"Humains" ,
