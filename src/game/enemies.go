@@ -7,6 +7,6 @@ type Enemy struct {
 	Damage int
 }
 
-func (enemy1 *Enemy) initEnemy() {
+func (enemy1 *Enemy) InitEnemy() {
 	*enemy1 = Enemy{"Recrue", 50, 50, 5}
 }
