@@ -22,13 +22,43 @@ type Item struct {
 	Quantity int
 }
 
+class1 := {
+	Name: "",
+	Class:"Humains" ,
+	Level : 1,
+	Hp : 50,
+	HpMax: 100 ,
+	Skill: []string{"Coup de poing"},
+}
+class2 := {
+	Name: "",
+	Class:"Elfes" ,
+	Level : 1,
+	Hp : 40,
+	HpMax: 80 ,
+	Skill: []string{"Coup de poing"},
+}
+class3 := {
+	Name: "",
+	Class:"Nains" ,
+	Level : 1,
+	Hp : 60,
+	HpMax: 120 ,
+	Skill: []string{"Coup de poing"},
+}
+
 func (player *Character) initCharacter() {
 	*player = Character{
-		Name:  "Momo",
+<<<<<<< HEAD
+		fmt.Println("Choisissez votre personnage: tapez 1, 2 ou 3.")
+
+=======
+		Name:  "",
 		Class: "Humain",
 		Level: 1,
 		Hp:    100,
 		HpMax: 150,
+>>>>>>> 17e4d5db6abc7cd88a486cfe09e99111a107313d
 		Inventory: []Item{
 			{"Item", 1},
 			{"Potion de vie", 3},
@@ -47,19 +77,35 @@ func (player *Character) initCharacter() {
 	}
 }
 
-func (player Character) characterCreation() {
-	fmt.Println("Choisissez un nom pour votre perso.")
-	var NameChoice string
-	fmt.Scan(&NameChoice)
+func (player *Character) characterCreation() {
+	var validName bool
+	for !validName {
+		fmt.Println("Choisissez un nom pour votre perso.")
+		var nameChoice string = ""
+		fmt.Scan(&nameChoice)
 
-	for _, letter := range NameChoice {
-		if (65 <= letter && letter <= 90) || (97 <= letter && letter <= 122) {
-			player.characterCreation()
-
-		} else {
-			fmt.Println("Oups erreur, votre nom n'est pas correcte, veuillez recommencer.")
+		for i := 0; i < len(nameChoice); i++ {
+			if !((65 <= nameChoice[i] && nameChoice[i] <= 90) || (97 <= nameChoice[i] && nameChoice[i] <= 122)) {
+				fmt.Println("Oups erreur, votre nom n'est pas correct, veuillez recommencer.")
+				validName = false
+				player.Name = ""
+				break
+			} else {
+				if (65 <= nameChoice[i] && nameChoice[i] <= 90) && i != 0 {
+					player.Name += string(nameChoice[i] + 32)
+					validName = true
+				} else if (97 <= nameChoice[i] && nameChoice[i] <= 122) && i != 0 {
+					player.Name += string(nameChoice[i])
+					validName = true
+				} else if (97 <= nameChoice[i] && nameChoice[i] <= 122) && i == 0 {
+					validName = true
+					player.Name += string(nameChoice[i] - 32)
+				} else if (65 <= nameChoice[i] && nameChoice[i] <= 90) && i == 0 {
+					validName = true
+					player.Name += string(nameChoice[i])
+				}
+			}
 		}
-
 	}
 }
 
@@ -84,9 +130,9 @@ func (player Character) AccesInventory() {
 		fmt.Printf("\t - %s x %d\n", items.Name, items.Quantity)
 	}
 
-	// var userChoice int
-	// fmt.Println("Voulez vous utiliser un objet ?\n\t1 - 9 : Utilise l'objet\n\t0 : Quitter l'inventaire")
-	// fmt.Scan(&userChoice)
+	var userChoice int
+	fmt.Println("Voulez vous utiliser un objet ?\n\t1 - 9 : Utilise l'objet\n\t0 : Quitter l'inventaire")
+	fmt.Scan(&userChoice)
 }
 
 func (player *Character) takePot() {
@@ -158,5 +204,7 @@ func (player *Character) spellBook() {
 func main() {
 	p1 := Character{}
 	p1.initCharacter()
+	p1.characterCreation()
+	p1.displayInfo()
 	p1.MainMenu()
 }
