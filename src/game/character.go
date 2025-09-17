@@ -80,15 +80,15 @@ var class3 Character = Character{
 	Skill:     []string{"Coup de poing"},
 }
 
-func (player *Character) classChoice() {
+func (player *Character) ClassChoice() {
 	var validClass bool
 	for !validClass {
 
-		fmt.Println("Voici les différentes classes : ")
+		fmt.Println("• Voici les différentes classes :")
 		fmt.Printf("\nClasse 1 : %s", class1.Class)
-		fmt.Printf("\n\tPv : %d\n\tDégats : %d\n\tCapacités : %s", class1.HpMax, class1.Damage, class1.Skill[0])
+		fmt.Printf("\n\tPv : %d\n\tDégats : %d\n\tCapacités : %s\n", class1.HpMax, class1.Damage, class1.Skill[0])
 		fmt.Printf("\nClasse 2 : %s", class2.Class)
-		fmt.Printf("\n\tPv : %d\n\tDégats : %d\n\tCapacités : %s", class2.HpMax, class2.Damage, class2.Skill[0])
+		fmt.Printf("\n\tPv : %d\n\tDégats : %d\n\tCapacités : %s\n", class2.HpMax, class2.Damage, class2.Skill[0])
 		fmt.Printf("\nClasse 3 : %s ", class3.Class)
 		fmt.Printf("\n\tPv : %d\n\tDégats : %d\n\tCapacités : %s\n", class3.HpMax, class3.Damage, class3.Skill[0])
 
@@ -107,16 +107,16 @@ func (player *Character) classChoice() {
 			*player = class3
 			validClass = true
 		default:
-			fmt.Println("Choix invalide, veuillez réessayer :")
+			fmt.Println("\nChoix invalide, veuillez réessayer !\n")
 		}
 	}
 }
 
 func (player *Character) CharacterCreation() {
-	player.classChoice()
+	//player.classChoice()
 	var validName bool
 	for !validName {
-		fmt.Println("Choisissez un nom pour votre perso : ")
+		fmt.Println("\nChoisissez un nom pour votre perso : ")
 		var nameChoice string = ""
 		fmt.Scan(&nameChoice)
 
@@ -397,7 +397,7 @@ func (player Character) MainMenu() {
 			fmt.Println("\nVous quittez l'aventure.\nMerci pour votre participation !\n(Prochaine fois c'est 10 balles si tu veux lancer le jeu)")
 			return
 		default:
-			fmt.Println("Choix invalide, veuillez réessayer (Tapez 0, 1 ou 2).")
+			fmt.Println("Choix invalide, veuillez réessayer (Tapez 0, 1, 2 ou 3).")
 		}
 	}
 }
