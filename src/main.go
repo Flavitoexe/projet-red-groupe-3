@@ -5,6 +5,7 @@ import "projet-red/game"
 func main() {
 	p1 := game.Character{}
 	// p1.InitCharacter()
+	game.Intro()
 	p1.CharacterCreation()
 	p1.MainMenu()
 	// e1 := game.Enemy{}
