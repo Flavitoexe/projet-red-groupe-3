@@ -4,16 +4,16 @@ import (
 	"fmt"
 )
 
-func (enemy *character.Enemy) enemyPattern(player character.Character, turn int) {
+func (enemy *Enemy) enemyPattern(player *Character, turn int) {
 	if turn%3 == 0 {
-		*player.Hp -= 2 * enemy.Damage
+		player.Hp -= 2 * enemy.Damage
 	} else {
 
-		*player.Hp -= enemy.Damage
+		player.Hp -= enemy.Damage
 	}
 }
 
-func (character *character.Character) characterTurn(enemy character.Enemy) {
+func (character *Character) characterTurn(enemy *Enemy) {
 	fmt.Println("\n=== Menu Combat ===\n")
 	fmt.Println("\t- Attaquer\t 1")
 	fmt.Println("\t- Inventaire\t 2")
@@ -24,15 +24,15 @@ func (character *character.Character) characterTurn(enemy character.Enemy) {
 
 	switch userChoice {
 	case 1:
-		*enemy.Hp -= character.Damage
+		enemy.Hp -= Damage
 		fmt.Printf("%s a infligé %d dégats à %s !", character.Name, character.Damage, enemy.Name)
 	case 2:
-		character.AccesInventory()
+		AccesInventory()
 		// fmt.Println("Voulez vous utiliser un objet ?\n\t0 : Non\n\t1 : Oui")
 		// var userChoice2 int
 
 	case 3:
-		character.MainMenu()
+		MainMenu()
 	}
 }
 
