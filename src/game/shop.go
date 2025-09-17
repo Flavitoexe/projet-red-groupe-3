@@ -22,20 +22,3 @@ func AccessShop() {
 	}
 	fmt.Println("\n\t 3. ==== Quitter le magasin (tu vas le regretter) ====")
 }
-func addInventory(player *Character, item Item) {
-	for index := range player.Inventory {
-		if player.Inventory[index].Name == item.Name {
-			player.Inventory[index].Quantity += item.Quantity
-			fmt.Printf("Qunatité de %s : %d", item.Name, player.Inventory[index].Quantity)
-			return
-		}
-	}
-}
-func removeInventor(player *Character, item Item, quantity int) {
-	for _,item2 := range player.Inventory
-
-}
-
-func main() {
-	accessMarchand()
-}
