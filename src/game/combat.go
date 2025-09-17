@@ -57,11 +57,3 @@ func TrainingFight(player Character, enemy Enemy) {
 		}
 	}
 }
-
-// func main() {
-// 	e1 := enemies.Enemy{}
-// 	e1.initEnemy()
-// 	p1 := character.Character{}
-// 	p1.initCharacter()
-// 	trainingFight(p1, e1)
-// }

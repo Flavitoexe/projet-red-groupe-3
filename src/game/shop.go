@@ -20,5 +20,5 @@ func AccessShop() {
 	for defense, price := range defenseMap {
 		fmt.Printf("\t - %s : %d H\n", defense, price)
 	}
-	fmt.Println("\n 3. ==== Quitter le magasin (tu vas le regretter) ====")
+	fmt.Println("\n\t 3. ==== Quitter le magasin (tu vas le regretter) ====")
 }
