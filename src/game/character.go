@@ -80,30 +80,6 @@ var class3 Character = Character{
 	Skill:     []string{"Coup de poing"},
 }
 
-// func (player *Character) InitCharacter() {
-// 	*player = Character{
-// 		Name:  "",
-// 		Class: "Humain",
-// 		Level: 1,
-// 		Hp:    100,
-// 		HpMax: 150,
-// 		Inventory: []Item{
-// 			{"Potion de vie", 3},
-// 			{"Potion de force", 2},
-// 			{"Flèches classiques", 10},
-// 			{"Flèches empoisonnées", 5},
-// 			{"Lame secrète", 4},
-// 			{"Epée classique", 1},
-// 			{"Epée moyenne", 1},
-// 			{"Epée plus", 1},
-// 			{"Bouclier unique", 1},
-// 			{"Arc", 1},
-// 		},
-// 		Damage: 5,
-// 		Skill:  []string{"Coup de poing"},
-// 	}
-// }
-
 func (player *Character) classChoice() {
 	var validClass bool
 	for !validClass {
@@ -203,12 +179,31 @@ func readInt(prompt string) int {
 	}
 }
 
-func addInventory() {
+func (player *Character) AddInventory(item Item) {
 
+	// if !(item.Tag == "Cons") {
+	// 	item.Quantity = 1
+	// }
+
+	for index := range player.Inventory {
+		if player.Inventory[index].Name == item.Name {
+			player.Inventory[index].Quantity += item.Quantity
+			fmt.Printf("Quantité de %s : %d\n", item.Name, player.Inventory[index].Quantity)
+			return
+		}
+	}
 }
 
-func removeInventor() {
+func (player *Character) RemoveInventory(item Item, quantity int) {
 
+	for index := range player.Inventory {
+		if player.Inventory[index].Quantity >= 0 && player.Inventory[index].Quantity-item.Quantity >= 0 {
+			player.Inventory[index].Quantity -= quantity
+			fmt.Printf("Nouvelle quantité de %s : %d\n", item.Name, player.Inventory[index].Quantity)
+			return
+		}
+	}
+	fmt.Printf("Vous n'avez pas de %s.\n", item.Name)
 }
 
 func (player Character) AccesInventory() {
@@ -366,6 +361,7 @@ func (player Character) MainMenu() {
 		fmt.Println("\n=== Menu Principal ===")
 		fmt.Printf("\t 1 - Informations du personnage\n")
 		fmt.Printf("\t 2 - Inventaire\n")
+		fmt.Printf("\t 3 - Hagraah\n")
 		fmt.Printf("\t 0 - Quitter\n")
 
 		// var validChoice bool
@@ -398,7 +394,7 @@ func (player Character) MainMenu() {
 		case 2:
 			player.AccesInventory()
 		case 0:
-			fmt.Println("\nVous quittez l'aventure.\nMerci pour votre participation !")
+			fmt.Println("\nVous quittez l'aventure.\nMerci pour votre participation !\n(Prochaine fois c'est 10 balles si tu veux lancer le jeu)")
 			return
 		default:
 			fmt.Println("Choix invalide, veuillez réessayer (Tapez 0, 1 ou 2).")
