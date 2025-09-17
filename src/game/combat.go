@@ -2,7 +2,6 @@ package game
 
 import (
 	"fmt"
-	
 )
 
 func (enemy *character.Enemy) enemyPattern(player character.Character, turn int) {
@@ -40,7 +39,9 @@ func (character *character.Character) characterTurn(enemy character.Enemy) {
 func (player *Character) trainingFight(enemy Enemy) {
 	fmt.Printf("\nVous rencontrez %s et il vous provoque.\n\tDéfoncez le.", enemy.Name)
 	cptTour := 1
-	for character.Hp > 0 && enemy.Hp > 0 {
+
+	for player.Hp > 0 && enemy.Hp > 0 {
+		player.isDead()
 		fmt.Printf("\n=== Tour %d ===\n", cptTour)
 		player.characterTurn(enemy)
 		if enemy.Hp > 0 {
@@ -48,5 +49,4 @@ func (player *Character) trainingFight(enemy Enemy) {
 			cpt++
 		}
 	}
-
 }

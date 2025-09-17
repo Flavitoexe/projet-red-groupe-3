@@ -4,11 +4,12 @@ import "projet-red/game"
 
 func main() {
 	p1 := game.Character{}
-	p1.InitCharacter()
+	// p1.InitCharacter()
+	game.Intro()
 	p1.CharacterCreation()
-	e1 := game.Enemy{}
-	e1.InitEnemy()
-	// p1.characterCreation()
-	//p1.MainMenu()
-	game.TrainingFight(p1, e1)
+	p1.MainMenu()
+	// e1 := game.Enemy{}
+	// e1.InitEnemy()
+	// game.TrainingFight(p1, e1)
+	// game.AccessShop()
 }
