@@ -22,7 +22,6 @@ type Item struct {
 	Quantity int
 }
 
-<<<<<<< HEAD
 type Equipment struct {
 	Casque string
 	Body string
@@ -35,24 +34,6 @@ class1 := {
 	Level : 1,
 	Hp : 50,
 	HpMax: 100 ,
-=======
-var class1 Character = Character{
-	Name:      "",
-	Class:     "Humains",
-	Level:     1,
-	Hp:        50,
-	HpMax:     100,
-	Inventory: []Item{},
-	Damage:    10,
-	Skill:     []string{"Coup de poing"},
-}
-var class2 Character = Character{
-	Name:  "",
-	Class: "Elfes",
-	Level: 1,
-	Hp:    40,
-	HpMax: 80,
->>>>>>> 0bc7ded6876537c731c9a027f7e4325296c08a62
 	Skill: []string{"Coup de poing"},
 }
 var class3 Character = Character{
@@ -118,7 +99,7 @@ func (player *Character) CharacterCreation() {
 				}
 			}
 		}
-	}
+	} 
 }
 
 func (player Character) displayInfo() {
