@@ -20,12 +20,7 @@ type Character struct {
 	Damage    int
 	Skill     []string
 	Money     int
-<<<<<<< HEAD
 	Equipment []Equipment
-=======
-	BowState  int
-	Infight   bool
->>>>>>> 1d95630892196ea972b511dd6ae62eb214dc1fc0
 }
 
 type Item struct {
@@ -83,19 +78,9 @@ func (player *Character) classChoice() {
 		fmt.Println(Underline + Bold + " Voici les différentes classes :" + Reset)
 		fmt.Printf(Bold+"\n• Classe 1 : %s"+Reset, class1.Class)
 		fmt.Printf("\n\tPv : %d\n\tDégats : %d\n\tCapacités : %s\n", class1.HpMax, class1.Damage, class1.Skill[0])
-<<<<<<< HEAD
 		fmt.Printf(Bold+"\n• Classe 2 : %s"+Reset, class2.Class)
 		fmt.Printf("\n\tPv : %d\n\tDégats : %d\n\tCapacités : %s\n", class2.HpMax, class2.Damage, class2.Skill[0])
 		fmt.Printf(Bold+"\n• Classe 3 : %s "+Reset, class3.Class)
-=======
-		fmt.Println("Guerrier polyvalent, a un bon nombre de points de vie et inflige de bons dégats.\n")
-
-		fmt.Printf("\nClasse 2 : %s", class2.Class)
-		fmt.Printf("\n\tPv : %d\n\tDégats : %d\n\tCapacités : %s\n", class2.HpMax, class2.Damage, class2.Skill[0])
-		fmt.Println("Guerrier léger, a moins de points de vie que sa version classique, mais inflige plus de dégats.\n")
-
-		fmt.Printf("\nClasse 3 : %s ", class3.Class)
->>>>>>> 1d95630892196ea972b511dd6ae62eb214dc1fc0
 		fmt.Printf("\n\tPv : %d\n\tDégats : %d\n\tCapacités : %s\n", class3.HpMax, class3.Damage, class3.Skill[0])
 		fmt.Println("Guerrier lourd, a plus de points de vie que ses autres versions, mais inflige moins de dégats.\n")
 
@@ -137,15 +122,19 @@ func (player *Character) CharacterCreation() {
 				if (65 <= nameChoice[i] && nameChoice[i] <= 90) && i != 0 {
 					player.Name += string(nameChoice[i] + 32)
 					validName = true
+					return
 				} else if (97 <= nameChoice[i] && nameChoice[i] <= 122) && i != 0 {
 					player.Name += string(nameChoice[i])
 					validName = true
+					return
 				} else if (97 <= nameChoice[i] && nameChoice[i] <= 122) && i == 0 {
 					validName = true
 					player.Name += string(nameChoice[i] - 32)
+					return
 				} else if (65 <= nameChoice[i] && nameChoice[i] <= 90) && i == 0 {
 					validName = true
 					player.Name += string(nameChoice[i])
+					return
 				}
 			}
 		}
