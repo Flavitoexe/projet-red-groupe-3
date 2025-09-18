@@ -76,8 +76,8 @@ func (player *Character) classChoice() {
 	var validClass bool
 	for !validClass {
 
-		fmt.Println("• Voici les différentes classes :")
-		fmt.Printf("\nClasse 1 : %s", class1.Class)
+		fmt.Println("•" + Underline + " Voici les différentes classes :" + Reset)
+		fmt.Printf(Bold+"\nClasse 1 : %s"+Reset, class1.Class)
 		fmt.Printf("\n\tPv : %d\n\tDégats : %d\n\tCapacités : %s\n", class1.HpMax, class1.Damage, class1.Skill[0])
 		fmt.Println("Guerrier polyvalent, a un bon nombre de points de vie et inflige de bons dégats.\n")
 
@@ -90,7 +90,7 @@ func (player *Character) classChoice() {
 		fmt.Println("Guerrier lourd, a plus de points de vie que ses autres versions, mais inflige moins de dégats.\n")
 
 		var classChoice int
-		fmt.Println("\nFaites votre choix (1, 2 ou 3): ")
+		fmt.Println(Blue + "\nFaites votre choix (1, 2 ou 3): " + Reset)
 		fmt.Scan(&classChoice)
 
 		switch classChoice {
@@ -104,7 +104,7 @@ func (player *Character) classChoice() {
 			*player = class3
 			validClass = true
 		default:
-			fmt.Println("\nChoix invalide, veuillez réessayer !\n")
+			fmt.Println(Red + "\nChoix invalide, veuillez réessayer !\n" + Reset)
 		}
 	}
 }
@@ -113,13 +113,13 @@ func (player *Character) CharacterCreation() {
 	player.classChoice()
 	var validName bool
 	for !validName {
-		fmt.Println("\nChoisissez un nom pour votre perso : ")
+		fmt.Println(Blue + "\nChoisissez un nom pour votre perso : " + Reset)
 		var nameChoice string = ""
 		fmt.Scan(&nameChoice)
 
 		for i := 0; i < len(nameChoice); i++ {
 			if !((65 <= nameChoice[i] && nameChoice[i] <= 90) || (97 <= nameChoice[i] && nameChoice[i] <= 122)) {
-				fmt.Println("Oups erreur, votre nom n'est pas correct, veuillez recommencer.")
+				fmt.Println(Red + "Oups erreur, votre nom n'est pas correct, veuillez recommencer." + Reset)
 				validName = false
 				player.Name = ""
 				break
@@ -160,25 +160,32 @@ func readInt(prompt string) int {
 		fmt.Print(prompt)
 		line, err := reader.ReadString('\n')
 		if err != nil {
-			fmt.Println("Erreur de lecture, réessayez.")
+			fmt.Println(Red + "Erreur de lecture, réessayez." + Reset)
 			continue
 		}
 		line = strings.TrimSpace(line)
 		if line == "" {
-			fmt.Println("Choix invalide, veuillez réessayer (Tapez 0, 1 ou 2).")
+			fmt.Println(Red + "Choix invalide, veuillez réessayer (Tapez 0, 1 ou 2)." + Reset)
 			continue
 		}
 		n, err := strconv.Atoi(line)
 		if err != nil {
-			fmt.Println("Entrée invalide, veuillez taper un nombre (ex: 1, 2, 0).")
+			fmt.Println(Red + "Entrée invalide, veuillez taper un nombre (ex: 1, 2, 0)." + Reset)
 			continue
 		}
 		return n
 	}
 }
 
-func (player *Character) AddInventory(item Item) {
+func (player *Character) limitInventory(item Item) {
+	if !(item.Quantity <= 10) {
+		fmt.Println(Red + "Oups, vous ne pouvez pas avoir d'autres objets." + Reset)
+		return
+	}
+}
 
+func (player *Character) AddInventory(item Item) {
+	player.limitInventory(item)
 	if item.Quantity > 0 && !(item.Tag == "Cons") {
 		fmt.Println(" item.Quantity > 0 && !(item.Tag == Cons)")
 		fmt.Println("Vous avez déjà cet objet.")
@@ -207,12 +214,11 @@ func (player *Character) RemoveInventory(item Item) {
 }
 
 func (player Character) AccesInventory() {
-
 	var leave bool
 	for !leave {
 		fmt.Println("\n=== Inventaire du personnage ===")
 		fmt.Println("\t1 == Armes ==\n\t2 == Armure ==\n\t3 == Consommables ==\n\t0 - Quitter\n")
-		userChoice := readInt("Que souhaitez vous voir ?  ")
+		userChoice := readInt(Blue + "Que souhaitez vous voir ?  " + Reset)
 
 		switch userChoice {
 
@@ -375,11 +381,11 @@ func (player *Character) takeStrenghtPot() {
 func (player Character) MainMenu() {
 	for {
 		fmt.Println("\n=== Menu Principal ===")
-		fmt.Println("\t 1 - Informations du personnage")
-		fmt.Println("\t 2 - Inventaire")
-		fmt.Println("\t 3 - Marchand")
-		fmt.Println("\t 4 - Entraînement")
-		fmt.Println("\t 0 - Quitter")
+		fmt.Printf("\t 1 - Informations du personnage\n")
+		fmt.Printf("\t 2 - Inventaire\n")
+		fmt.Printf("\t 3 - Marchand\n")
+		fmt.Printf("\t 4 - Forgeron\n")
+		fmt.Printf("\t 0 - Quitter\n")
 
 		userChoice := readInt("\nQue souhaitez vous faire ? ")
 
@@ -391,12 +397,12 @@ func (player Character) MainMenu() {
 		case 3:
 			player.AccessShop()
 		case 4:
-			TrainingFight(&player)
+			player.MenuForgeron()
 		case 0:
-			fmt.Println("\nVous quittez l'aventure.\nMerci pour votre participation !\n(Prochaine fois c'est 10 balles si tu veux lancer le jeu)")
+			fmt.Println(Magenta + "\nVous quittez l'aventure.\nMerci pour votre participation !\n(Prochaine fois c'est 10 balles si tu veux lancer le jeu)\n" + Reset)
 			return
 		default:
-			fmt.Println("\nChoix invalide, veuillez réessayer (Tapez 0, 1 ou 2).")
+			fmt.Println(Red + "Choix invalide, veuillez réessayer (Tapez 0, 1 ou 2)." + Reset)
 		}
 	}
 }
@@ -419,3 +425,65 @@ func (player *Character) spellBook() {
 		}
 	}
 }
+
+func (player Character) MenuForgeron() {
+	var valid bool
+	for !valid {
+		fmt.Println("\n=== Menu Forgeron ===")
+		fmt.Printf("\t 1 - Chapeau de l'aventurier\n")
+		fmt.Printf("\t 2 - Tunique de l'aventurier\n")
+		fmt.Printf("\t 3 - Bottes de l'aventurier\n")
+		fmt.Printf("\t 4 - Inventaire\n")
+		fmt.Printf("\t 0 - Quitter\n")
+
+		var menuForgeron int
+		fmt.Println(Blue + "\nFaites votre choix (0, 1, 2, 3 ou 4): " + Reset)
+		fmt.Scan(&menuForgeron)
+
+		switch menuForgeron {
+		case 1:
+			if player.Money >= 5 {
+				player.Money -= 5
+				player.AddInventory(chapeauAventurier)
+				fmt.Println(Green + "\nYoupi! Le forgeron a fabriqué le chapeau de l'aventurier.\n" + Reset)
+
+			} else {
+				fmt.Print(Red + "Oups, vous n'avez pas assez d'argent pour le fabriquer !" + Reset)
+			}
+		case 2:
+			if player.Money >= 5 {
+				player.Money -= 5
+				player.AddInventory(tuniqueAventurier)
+				fmt.Println(Green + "\nYoupi! Le forgeron a fabriqué la tunique de l'aventurier.\n" + Reset)
+			} else {
+				fmt.Print(Red + "Oups, vous n'avez pas assez d'argent pour le fabriquer !" + Reset)
+			}
+		case 3:
+			if player.Money >= 5 {
+				player.Money -= 5
+				player.AddInventory(BottesAventurier)
+				fmt.Println(Green + "\nYoupi! Le forgeron a fabriqué les bottes de l'aventurier.\n" + Reset)
+			} else {
+				fmt.Print(Red + "Oups, vous n'avez pas assez d'argent pour le fabriquer !" + Reset)
+			}
+		case 4:
+			player.AccesInventory()
+		case 0:
+			return
+		default:
+			fmt.Println(Red + "\nChoix invalide, veuillez réessayer !\n" + Reset)
+		}
+	}
+}
+
+const (
+	Reset     = "\033[0m"
+	Red       = "\033[31m"
+	Green     = "\033[32m"
+	Yellow    = "\033[33m"
+	Blue      = "\033[34m"
+	Magenta   = "\033[35m"
+	Cyan      = "\033[36m"
+	Bold      = "\033[1m"
+	Underline = "\033[4m"
+)
