@@ -25,7 +25,9 @@ var arrow Item = Item{"Flèches classiques", 0, "Cons"}
 var poisonedArrow Item = Item{"Flèches empoisonnées", 0, "Cons"}
 
 // Inventaire du joueur
-var inventory []Item = []Item{secretBlade, classicSword, mediumSword, plusSword, bow, shield, healthPot, strenghtPot, arrow, poisonedArrow}
+var inventory []Item = []Item{secretBlade, classicSword, mediumSword, plusSword, rareSword, ultraRareSword, bow, eyeOfDawnBow,
+	shield, uniqueShield, spartanShield,
+	healthPot, strenghtPot, arrow, poisonedArrow}
 
 // Maps et Arrays pour le shop
 var weaponMap map[Item]int = map[Item]int{classicSword: 15, mediumSword: 20, rareSword: 35, ultraRareSword: 60, eyeOfDawnBow: 80}

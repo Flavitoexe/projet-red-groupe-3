@@ -50,6 +50,7 @@ func (player *Character) AccessShop() {
 				fmt.Printf("\t%d - %s : %d H\n", i, weapon.Name, weaponMap[weapon])
 				i++
 			}
+			fmt.Printf("\n%d H disponibles.", player.Money)
 			fmt.Println("\nQue souhaitez vous acheter ?")
 
 			userChoice2 := readInt("(1-9 pour sélectionner une arme, 0 pour quitter)\n")
@@ -75,6 +76,7 @@ func (player *Character) AccessShop() {
 				fmt.Printf("\t%d - %s : %d H\n", i, defense.Name, defenseMap[defense])
 				i++
 			}
+			fmt.Printf("\n%d H disponibles.", player.Money)
 			fmt.Println("\nQue souhaitez vous acheter ?")
 
 			userChoice2 := readInt("(1-9 pour sélectionner une défense, 0 pour quitter)\n")
@@ -99,9 +101,10 @@ func (player *Character) AccessShop() {
 				fmt.Printf("\t%d - %s : %d H\n", i, consommables.Name, consMap[consommables])
 				i++
 			}
+			fmt.Printf("\n%d H disponibles.", player.Money)
 			fmt.Println("\nQue souhaitez vous acheter ?")
 
-			userChoice2 := readInt("(1-9 pour sélectionner une arme, 0 pour quitter)\n")
+			userChoice2 := readInt("(1-9 pour sélectionner un consommable, 0 pour quitter)\n")
 			if userChoice2 == 0 {
 				player.AccessShop()
 				leave = true
@@ -124,14 +127,4 @@ func (player *Character) AccessShop() {
 			fmt.Println("Choix invalide, veuillez réessayer.")
 		}
 	}
-	// fmt.Println("\n= Armes =")
-
-	// for weapon, price := range weaponsMap {
-	// 	fmt.Printf("\t - %s : %d H\n", weapon, price)
-	// }
-	// // fmt.Println("")
-	// fmt.Println("\n= Défenses =")
-	// for defense, price := range defenseMap {
-	// 	fmt.Printf("\t - %s : %d H\n", defense, price)
-	// }
 }
