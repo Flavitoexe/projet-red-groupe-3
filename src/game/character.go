@@ -21,6 +21,7 @@ type Character struct {
 	Skill     []string
 	BowState  int
 	Money     int
+	Equipment []Equipment
 }
 
 type Item struct {
@@ -88,12 +89,12 @@ func (player *Character) ClassChoice() {
 	var validClass bool
 	for !validClass {
 
-		fmt.Println("•" + Underline + " Voici les différentes classes :" + Reset)
-		fmt.Printf(Bold+"\nClasse 1 : %s"+Reset, class1.Class)
+		fmt.Println(Underline + Bold + " Voici les différentes classes :" + Reset)
+		fmt.Printf(Bold+"\n• Classe 1 : %s"+Reset, class1.Class)
 		fmt.Printf("\n\tPv : %d\n\tDégats : %d\n\tCapacités : %s\n", class1.HpMax, class1.Damage, class1.Skill[0])
-		fmt.Printf("\nClasse 2 : %s", class2.Class)
+		fmt.Printf(Bold+"\n• Classe 2 : %s"+Reset, class2.Class)
 		fmt.Printf("\n\tPv : %d\n\tDégats : %d\n\tCapacités : %s\n", class2.HpMax, class2.Damage, class2.Skill[0])
-		fmt.Printf("\nClasse 3 : %s ", class3.Class)
+		fmt.Printf(Bold+"\n• Classe 3 : %s "+Reset, class3.Class)
 		fmt.Printf("\n\tPv : %d\n\tDégats : %d\n\tCapacités : %s\n", class3.HpMax, class3.Damage, class3.Skill[0])
 
 		var classChoice int
@@ -443,6 +444,10 @@ func (player Character) MenuForgeron() {
 			fmt.Println(Red + "\nChoix invalide, veuillez réessayer !\n" + Reset)
 		}
 	}
+}
+
+func (player Character) upgradeInventorySlot() {
+
 }
 
 const (
