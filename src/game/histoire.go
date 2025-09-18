@@ -39,13 +39,20 @@ func DieuHadès() {
 }
 
 func PremierGardien() {
+	GainRound()
 	fmt.Print("Bravo, guerrier. Ce gardien est tombé… mais un autre te défie à son tour.\n\n")
 }
 
 func DeuxiemeGardien() {
-	fmt.Print(("Tu as vaincu le dernier gardien... le dieu t'attend.\n\n"))
+	GainRound()
+	fmt.Print("Tu as vaincu le dernier gardien... le dieu t'attend.\n\n")
 }
 
 func VictoirPerso() {
 	fmt.Print("Tu as gagné. Par ton courage et ta force, tu as libéré les dieux.\n Grâce à toi, la Terre est sauvée.\n Nous te remercions, héros, car c'est toi qui as changé le destin du monde.\n\n")
+}
+
+func PerduCombat() {
+	fmt.Print(Perdu)
+	fmt.Print("Tu as été vaincu… mais ce n'est que partie remise. À la prochaine, héros déchu.\n")
 }

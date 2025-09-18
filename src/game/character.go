@@ -19,8 +19,12 @@ type Character struct {
 	Damage    int
 	Skill     []string
 	Money     int
+<<<<<<< HEAD
+	Equipment []Equipment
+=======
 	BowState  int
 	Infight   bool
+>>>>>>> 1d95630892196ea972b511dd6ae62eb214dc1fc0
 }
 
 type Item struct {
@@ -75,9 +79,14 @@ func (player *Character) classChoice() {
 	var validClass bool
 	for !validClass {
 
-		fmt.Println("•" + Underline + " Voici les différentes classes :" + Reset)
-		fmt.Printf(Bold+"\nClasse 1 : %s"+Reset, class1.Class)
+		fmt.Println(Underline + Bold + " Voici les différentes classes :" + Reset)
+		fmt.Printf(Bold+"\n• Classe 1 : %s"+Reset, class1.Class)
 		fmt.Printf("\n\tPv : %d\n\tDégats : %d\n\tCapacités : %s\n", class1.HpMax, class1.Damage, class1.Skill[0])
+<<<<<<< HEAD
+		fmt.Printf(Bold+"\n• Classe 2 : %s"+Reset, class2.Class)
+		fmt.Printf("\n\tPv : %d\n\tDégats : %d\n\tCapacités : %s\n", class2.HpMax, class2.Damage, class2.Skill[0])
+		fmt.Printf(Bold+"\n• Classe 3 : %s "+Reset, class3.Class)
+=======
 		fmt.Println("Guerrier polyvalent, a un bon nombre de points de vie et inflige de bons dégats.\n")
 
 		fmt.Printf("\nClasse 2 : %s", class2.Class)
@@ -85,6 +94,7 @@ func (player *Character) classChoice() {
 		fmt.Println("Guerrier léger, a moins de points de vie que sa version classique, mais inflige plus de dégats.\n")
 
 		fmt.Printf("\nClasse 3 : %s ", class3.Class)
+>>>>>>> 1d95630892196ea972b511dd6ae62eb214dc1fc0
 		fmt.Printf("\n\tPv : %d\n\tDégats : %d\n\tCapacités : %s\n", class3.HpMax, class3.Damage, class3.Skill[0])
 		fmt.Println("Guerrier lourd, a plus de points de vie que ses autres versions, mais inflige moins de dégats.\n")
 
@@ -476,6 +486,10 @@ func (player Character) MenuForgeron() {
 			fmt.Println(Red + "\nChoix invalide, veuillez réessayer !\n" + Reset)
 		}
 	}
+}
+
+func (player Character) upgradeInventorySlot() {
+
 }
 
 const (
