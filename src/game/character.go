@@ -184,8 +184,15 @@ func readInt(prompt string) int {
 	}
 }
 
-func (player *Character) AddInventory(item Item) {
+func (player *Character) limitInventory(item Item) {
+	if !(item.Quantity <= 10) {
+		fmt.Println(Red + "Oups, vous ne pouvez pas avoir d'autres objets." + Reset)
+		return
+	}
+}
 
+func (player *Character) AddInventory(item Item) {
+	player.limitInventory(item)
 	if item.Quantity > 0 && !(item.Tag == "Cons") {
 		fmt.Println("Vous avez déjà cet objet.")
 		return
@@ -289,6 +296,7 @@ func (player Character) AccesInventory() {
 	// 		fmt.Printf("\t - %s x %d\n", items.Name, items.Quantity)
 	// 	}
 	// }
+
 }
 
 func (player *Character) takeHealthPot() {
@@ -344,10 +352,6 @@ func (player Character) MainMenu() {
 		fmt.Println("\n=== Menu Principal ===")
 		fmt.Printf("\t 1 - Informations du personnage\n")
 		fmt.Printf("\t 2 - Inventaire\n")
-<<<<<<< HEAD
-=======
-		fmt.Printf("\t 3 - Marchand\n")
->>>>>>> 52dcb60b69b70d755d9705eea6bf592dc19783d2
 		fmt.Printf("\t 0 - Quitter\n")
 
 		userChoice := readInt("\nQue souhaitez vous faire ? ")
@@ -363,11 +367,7 @@ func (player Character) MainMenu() {
 			fmt.Println(Magenta + "\nVous quittez l'aventure.\nMerci pour votre participation !\n(Prochaine fois c'est 10 balles si tu veux lancer le jeu)\n" + Reset)
 			return
 		default:
-<<<<<<< HEAD
 			fmt.Println(Red + "Choix invalide, veuillez réessayer (Tapez 0, 1 ou 2)." + Reset)
-=======
-			fmt.Println("\nChoix invalide, veuillez réessayer (Tapez 0, 1 ou 2).")
->>>>>>> 52dcb60b69b70d755d9705eea6bf592dc19783d2
 		}
 	}
 }
