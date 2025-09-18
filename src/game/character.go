@@ -20,6 +20,7 @@ type Character struct {
 	Damage    int
 	Skill     []string
 	BowState  int
+	Money     int
 }
 
 type Item struct {
@@ -34,18 +35,18 @@ type Equipment struct {
 	Foot   string
 }
 
-var basicInventory []Item = []Item{
-	{"Lame secrète", 4, "Arme"},
-	{"Epée classique", 1, "Arme"},
-	{"Epée moyenne", 0, "Arme"},
-	{"Epée plus", 0, "Arme"},
-	{"Arc", 1, "Arme"},
-	{"Bouclier unique", 1, "Armure"},
-	{"Potion de vie", 1, "Cons"},
-	{"Potion de force", 2, "Cons"},
-	{"Flèches classiques", 10, "Cons"},
-	{"Flèches empoisonnées", 0, "Cons"},
-}
+// var basicInventory []Item = []Item{
+// 	{"Lame secrète", 4, "Arme"},
+// 	{"Epée classique", 1, "Arme"},
+// 	{"Epée moyenne", 0, "Arme"},
+// 	{"Epée plus", 0, "Arme"},
+// 	{"Arc", 1, "Arme"},
+// 	{"Bouclier unique", 1, "Armure"},
+// 	{"Potion de vie", 1, "Cons"},
+// 	{"Potion de force", 2, "Cons"},
+// 	{"Flèches classiques", 10, "Cons"},
+// 	{"Flèches empoisonnées", 0, "Cons"},
+// }
 
 var class1 Character = Character{
 	Name:      "",
@@ -53,9 +54,10 @@ var class1 Character = Character{
 	Level:     1,
 	Hp:        50,
 	HpMax:     100,
-	Inventory: basicInventory,
+	Inventory: inventory,
 	Damage:    10,
 	Skill:     []string{"Coup de poing"},
+	Money:     50,
 }
 
 var class2 Character = Character{
@@ -64,9 +66,10 @@ var class2 Character = Character{
 	Level:     1,
 	Hp:        40,
 	HpMax:     80,
-	Inventory: basicInventory,
+	Inventory: inventory,
 	Damage:    10,
 	Skill:     []string{"Coup de poing"},
+	Money:     50,
 }
 
 var class3 Character = Character{
@@ -75,9 +78,10 @@ var class3 Character = Character{
 	Level:     1,
 	Hp:        60,
 	HpMax:     120,
-	Inventory: basicInventory,
+	Inventory: inventory,
 	Damage:    10,
 	Skill:     []string{"Coup de poing"},
+	Money:     50,
 }
 
 func (player *Character) ClassChoice() {
@@ -153,6 +157,7 @@ func (player Character) displayInfo() {
 	fmt.Printf("\t - Points de vie actuels : %d\n", player.Hp)
 	fmt.Printf("\t - Points de vie max : %d\n", player.HpMax)
 	fmt.Printf("\t - Dégats : %d\n", player.Damage)
+	fmt.Printf("\t - Argent : %d\n", player.Money)
 
 }
 
@@ -181,14 +186,15 @@ func readInt(prompt string) int {
 
 func (player *Character) AddInventory(item Item) {
 
-	// if !(item.Tag == "Cons") {
-	// 	item.Quantity = 1
-	// }
+	if item.Quantity > 0 && !(item.Tag == "Cons") {
+		fmt.Println("Vous avez déjà cet objet.")
+		return
+	}
 
 	for index := range player.Inventory {
 		if player.Inventory[index].Name == item.Name {
-			player.Inventory[index].Quantity += item.Quantity
-			fmt.Printf("Quantité de %s : %d\n", item.Name, player.Inventory[index].Quantity)
+			player.Inventory[index].Quantity++
+			fmt.Printf("\nQuantité de %s : %d\n", item.Name, player.Inventory[index].Quantity)
 			return
 		}
 	}
@@ -333,57 +339,16 @@ func (player *Character) takeStrenghtPot() {
 	// }
 }
 
-// func readInt(prompt string) int {
-// 	reader := bufio.NewReader(os.Stdin)
-// 	for {
-// 		fmt.Print(prompt)
-// 		line, err := reader.ReadString('\n')
-// 		if err != nil {
-// 			fmt.Println("Erreur de lecture, réessayez.")
-// 			continue
-// 		}
-// 		line = strings.TrimSpace(line)
-// 		if line == "" {
-// 			fmt.Println("Choix invalide, veuillez réessayer (Tapez 0, 1 ou 2).")
-// 			continue
-// 		}
-// 		n, err := strconv.Atoi(line)
-// 		if err != nil {
-// 			fmt.Println("Entrée invalide, veuillez taper un nombre (ex: 1, 2, 0).")
-// 			continue
-// 		}
-// 		return n
-// 	}
-// }
-
 func (player Character) MainMenu() {
 	for {
 		fmt.Println("\n=== Menu Principal ===")
 		fmt.Printf("\t 1 - Informations du personnage\n")
 		fmt.Printf("\t 2 - Inventaire\n")
+<<<<<<< HEAD
+=======
+		fmt.Printf("\t 3 - Marchand\n")
+>>>>>>> 52dcb60b69b70d755d9705eea6bf592dc19783d2
 		fmt.Printf("\t 0 - Quitter\n")
-
-		// var validChoice bool
-
-		// for !validChoice {
-		// 	fmt.Println("\nQue souhaitez vous faire ?")
-		// 	var userChoice int
-		// 	fmt.Scan(userChoice)
-
-		// 	switch userChoice {
-		// 	case 1:
-		// 		player.displayInfo()
-		// 		validChoice = true
-		// 	case 2:
-		// 		player.AccesInventory()
-		// 		validChoice = true
-		// 	case 0:
-		// 		fmt.Println("\nVous quittez l'aventure.\nMerci pour votre participation !")
-		// 		os.Exit(02)
-		// 	default:
-		// 		fmt.Println("Choix invalide, veuillez réessayer :")
-		// 	}
-		// }
 
 		userChoice := readInt("\nQue souhaitez vous faire ? ")
 
@@ -392,18 +357,24 @@ func (player Character) MainMenu() {
 			player.displayInfo()
 		case 2:
 			player.AccesInventory()
+		case 3:
+			player.AccessShop()
 		case 0:
 			fmt.Println(Magenta + "\nVous quittez l'aventure.\nMerci pour votre participation !\n(Prochaine fois c'est 10 balles si tu veux lancer le jeu)\n" + Reset)
 			return
 		default:
+<<<<<<< HEAD
 			fmt.Println(Red + "Choix invalide, veuillez réessayer (Tapez 0, 1 ou 2)." + Reset)
+=======
+			fmt.Println("\nChoix invalide, veuillez réessayer (Tapez 0, 1 ou 2).")
+>>>>>>> 52dcb60b69b70d755d9705eea6bf592dc19783d2
 		}
 	}
 }
 
 func (player *Character) isDead() {
 	if player.Hp == 0 {
-		fmt.Println("\nTu es mort, repenses-y à deux fois la prochaine fois.\n")
+		fmt.Println("\n\nTu es mort, repenses-y à deux fois la prochaine fois.\n")
 		fmt.Println("Tu viens de ressusciter, bonne chance à toi !")
 		player.Hp = player.HpMax / 2
 		fmt.Printf("Ton nouveau Hp est : %d\n", player.Hp)
