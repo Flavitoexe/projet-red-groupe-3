@@ -91,35 +91,47 @@ func (player *Character) classChoice() {
 		fmt.Println(Underline + Bold + " Voici les différentes classes :" + Reset)
 		fmt.Printf(Bold+"\n• Classe 1 : %s"+Reset, class1.Class)
 		fmt.Printf("\n\tPv : %d\n\tDégats : %d\n\tCapacités : %s\n", class1.HpMax, class1.Damage, class1.Skill[0])
+<<<<<<< HEAD
 		fmt.Println("Guerrier polyvalent, a un bon nombre de points de vie et inflige de bons dégats.\n")
 
 		fmt.Printf(Bold+"\n• Classe 2 : %s"+Reset, class2.Class)
 		fmt.Printf("\n\tPv : %d\n\tDégats : %d\n\tCapacités : %s\n", class2.HpMax, class2.Damage, class2.Skill[0])
 		fmt.Println("Guerrier léger, a moins de points de vie que sa version classique, mais inflige plus de dégats.\n")
 
+=======
+		fmt.Printf(Bold+"\n• Classe 2 : %s"+Reset, class2.Class)
+		fmt.Printf("\n\tPv : %d\n\tDégats : %d\n\tCapacités : %s\n", class2.HpMax, class2.Damage, class2.Skill[0])
+>>>>>>> 67e49c7fe266e4c95f4c98a2f9a66103c7fd28da
 		fmt.Printf(Bold+"\n• Classe 3 : %s "+Reset, class3.Class)
 		fmt.Printf("\n\tPv : %d\n\tDégats : %d\n\tCapacités : %s\n", class3.HpMax, class3.Damage, class3.Skill[0])
 		fmt.Println("Guerrier lourd, a plus de points de vie que ses autres versions, mais inflige moins de dégats.\n")
 
 		var classChoice int
-		fmt.Println(Blue + "\nFaites votre choix (1, 2 ou 3): " + Reset)
+		fmt.Println(Blue + "\nFaites votre choix (1, 2 ou 3): \n " + Reset)
 		fmt.Scan(&classChoice)
 
 		switch classChoice {
 		case 1:
 			*player = class1
 			validClass = true
+			return
 		case 2:
 			*player = class2
 			validClass = true
+			return
 		case 3:
 			*player = class3
 			validClass = true
+<<<<<<< HEAD
 		case 3003:
 			*player = class4
 			validClass = true
+=======
+			return
+>>>>>>> 67e49c7fe266e4c95f4c98a2f9a66103c7fd28da
 		default:
 			fmt.Println(Red + "\nChoix invalide, veuillez réessayer !\n" + Reset)
+			return
 		}
 	}
 }
@@ -142,15 +154,19 @@ func (player *Character) CharacterCreation() {
 				if (65 <= nameChoice[i] && nameChoice[i] <= 90) && i != 0 {
 					player.Name += string(nameChoice[i] + 32)
 					validName = true
+					break
 				} else if (97 <= nameChoice[i] && nameChoice[i] <= 122) && i != 0 {
 					player.Name += string(nameChoice[i])
 					validName = true
+					break
 				} else if (97 <= nameChoice[i] && nameChoice[i] <= 122) && i == 0 {
 					validName = true
 					player.Name += string(nameChoice[i] - 32)
+					break
 				} else if (65 <= nameChoice[i] && nameChoice[i] <= 90) && i == 0 {
 					validName = true
 					player.Name += string(nameChoice[i])
+					break
 				}
 			}
 		}
@@ -175,17 +191,17 @@ func readInt(prompt string) int {
 		fmt.Print(prompt)
 		line, err := reader.ReadString('\n')
 		if err != nil {
-			fmt.Println(Red + "Erreur de lecture, réessayez." + Reset)
+			fmt.Println(Red + "Erreur de lecture, réessayez.\n" + Reset)
 			continue
 		}
 		line = strings.TrimSpace(line)
 		if line == "" {
-			fmt.Println(Red + "Choix invalide, veuillez réessayer (Tapez 0, 1 ou 2)." + Reset)
+			fmt.Println(Red + "Choix invalide, veuillez réessayer.\n" + Reset)
 			continue
 		}
 		n, err := strconv.Atoi(line)
 		if err != nil {
-			fmt.Println(Red + "Entrée invalide, veuillez taper un nombre (ex: 1, 2, 0)." + Reset)
+			fmt.Println(Red + "Entrée invalide, veuillez taper un nombre.\n" + Reset)
 			continue
 		}
 		return n
@@ -194,7 +210,7 @@ func readInt(prompt string) int {
 
 func (player *Character) limitInventory(item Item) {
 	if !(item.Quantity <= 10) {
-		fmt.Println(Red + "Oups, vous ne pouvez pas avoir d'autres objets." + Reset)
+		fmt.Println(Red + "Oups, vous ne pouvez pas avoir d'autres objets.\n" + Reset)
 		return
 	}
 }
@@ -202,7 +218,7 @@ func (player *Character) limitInventory(item Item) {
 func (player *Character) AddInventory(item Item, quantity int) {
 	// player.limitInventory(item)
 	if item.Quantity > 0 && !(item.Tag == "Cons") {
-		fmt.Println("Vous avez déjà cet objet.")
+		fmt.Println("Vous avez déjà cet objet.\n")
 		return
 	}
 
@@ -232,13 +248,18 @@ func (player *Character) AccesInventory() {
 	var leave bool
 	for !leave {
 		fmt.Println("\n=== Inventaire du personnage ===")
+<<<<<<< HEAD
 		fmt.Println("\t1 == Armes ==\n\t2 == Armure ==\n\t3 == Consommables ==\n\t4 == Matériaux ==\n\t0 - Quitter\n")
 		userChoice := readInt(Blue + "Que souhaitez vous voir ?  " + Reset)
+=======
+		fmt.Println("\t1 == Armes ==\n\t2 == Armure ==\n\t3 == Consommables ==\n\t0 - Quitter\n")
+		userChoice := readInt(Blue + "Que souhaitez vous voir ? \n " + Reset)
+>>>>>>> 67e49c7fe266e4c95f4c98a2f9a66103c7fd28da
 
 		switch userChoice {
 
 		case 0:
-			fmt.Println("Vous quittez l'inventaire.")
+			fmt.Println("Vous quittez l'inventaire.\n")
 			leave = true
 		case 1:
 			fmt.Println("== Armes ==")
@@ -338,8 +359,8 @@ func (player *Character) AccesInventory() {
 				}
 			}
 
-			fmt.Println("\nVoulez vous utiliser un objet ?\n(0 pour sortir, 1 - 2 pour consommer une potion, 3 - 4 pour seléctionner un type de flèche)\n")
-			userChoice2 := readInt("Votre choix : ")
+			fmt.Println(Blue + "\nVoulez vous utiliser un objet ?\n" + Reset + "(0 pour sortir, 1 - 2 pour consommer une potion, 3 - 4 pour seléctionner un type de flèche)\n")
+			userChoice2 := readInt(Blue + "Votre choix : \n" + Reset)
 
 			switch userChoice2 {
 
@@ -454,7 +475,8 @@ func (player *Character) takeStrenghtPot() {
 }
 
 func (player Character) MainMenu() {
-	for {
+	var validChoice bool
+	for !validChoice {
 		fmt.Println("\n=== Menu Principal ===")
 		fmt.Printf("\t 1 - Informations du personnage\n")
 		fmt.Printf("\t 2 - Inventaire\n")
@@ -463,9 +485,11 @@ func (player Character) MainMenu() {
 		fmt.Printf("\t 5 - Entraînement\n")
 		fmt.Printf("\t 0 - Quitter\n")
 
-		userChoice := readInt("\nQue souhaitez vous faire ? ")
+		var menuChoice int
+		fmt.Println(Blue + "\nFaites votre choix (0, 1, 2, 3, 4 ou 5): " + Reset)
+		fmt.Scan(&menuChoice)
 
-		switch userChoice {
+		switch menuChoice {
 		case 1:
 			player.displayInfo()
 		case 2:
@@ -480,15 +504,15 @@ func (player Character) MainMenu() {
 			fmt.Println(Magenta + "\nVous quittez l'aventure.\nMerci pour votre participation !\n(Prochaine fois c'est 10 balles si tu veux lancer le jeu)\n" + Reset)
 			return
 		default:
-			fmt.Println(Red + "Choix invalide, veuillez réessayer (Tapez 0, 1 ou 2)." + Reset)
+			fmt.Println(Red + "Choix invalide, veuillez réessayer (tapez une des propositions ci-dessus)." + Reset)
 		}
 	}
 }
 
 func (player *Character) isDead() {
 	if player.Hp == 0 {
-		fmt.Println("\n\nTu es mort, repenses-y à deux fois la prochaine fois.\n")
-		fmt.Println("Tu viens de ressusciter, bonne chance à toi !")
+		fmt.Println(Cyan + "\n\nTu es mort, repenses-y à deux fois la prochaine fois.\n" + Reset)
+		fmt.Println(Green + "Tu viens de ressusciter, bonne chance à toi !" + Reset)
 		player.Hp = player.HpMax / 2
 		fmt.Printf("Ton nouveau Hp est : %d\n", player.Hp)
 	}

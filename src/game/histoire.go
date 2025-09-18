@@ -3,7 +3,7 @@ package game
 import "fmt"
 
 func Intro() {
-	fmt.Print("\nBienvenue héros, ton voyage commence car le monde a besoin de ton courage. \nEn effet, les dieux, autrefois protecteurs de l'humanité, ont été corrompus par une force maléfique. Notre monde est désormais plongé dans le chaos et seul un héros choisi par le destin peut le sauver. Pour cela il lui faudra les affronter et les tuer. C'est le seul moyen de ramener la paix.\n\n")
+	fmt.Print("\nBienvenue héros, ton voyage commence ici car le monde a besoin de ton courage. \nEn effet, les dieux, autrefois protecteurs de l'humanité, ont été corrompus par une force maléfique. Notre monde est désormais plongé dans le chaos et seul un héros choisi par le destin peut le sauver. Pour cela il lui faudra les affronter et les tuer. C'est le seul moyen de ramener la paix.\n\n")
 }
 
 func GardinensArtemis() {
@@ -49,7 +49,8 @@ func DeuxiemeGardien() {
 }
 
 func VictoirPerso() {
-	fmt.Print("\nTu as gagné. Par ton courage et ta force, tu as libéré les dieux.\n Grâce à toi, la Terre est sauvée.\n Nous te remercions, héros, car c'est toi qui as changé le destin du monde.\n\n")
+	FinJeu()
+	fmt.Print("Tu as gagné. Par ton courage et ta force, tu as libéré les dieux.\n Grâce à toi, la Terre est sauvée.\n Nous te remercions, héros, car c'est toi qui as changé le destin du monde.\n\n")
 }
 
 func PerduCombat() {
