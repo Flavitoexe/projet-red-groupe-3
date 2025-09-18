@@ -65,7 +65,7 @@ func (player *Character) AccessShop() {
 					player.Money -= weaponMap[weaponArr[userChoice2-1]]
 					fmt.Printf("\nObjet '%s' ajouté à votre inventaire !", weaponArr[userChoice2-1].Name)
 					fmt.Printf("\n- %d H. %d restants.", weaponMap[weaponArr[userChoice2-1]], player.Money)
-					player.AddInventory(weaponArr[userChoice2-1])
+					player.AddInventory(weaponArr[userChoice2-1], 1)
 				}
 			}
 
@@ -90,7 +90,7 @@ func (player *Character) AccessShop() {
 					player.Money -= defenseMap[defenseArr[userChoice2-1]]
 					fmt.Printf("\nObjet '%s' ajouté à votre inventaire !", defenseArr[userChoice2-1].Name)
 					fmt.Printf("\n- %d H. %d restants.", defenseMap[defenseArr[userChoice2-1]], player.Money)
-					player.AddInventory(defenseArr[userChoice2-1])
+					player.AddInventory(defenseArr[userChoice2-1], 1)
 				}
 			}
 
@@ -105,17 +105,20 @@ func (player *Character) AccessShop() {
 			fmt.Println("\nQue souhaitez vous acheter ?")
 
 			userChoice2 := readInt("(1-9 pour sélectionner un consommable, 0 pour quitter)\n")
+
 			if userChoice2 == 0 {
 				player.AccessShop()
 				leave = true
 			} else {
-				if player.Money-consMap[consArr[userChoice2-1]] < 0 {
+				quantityChoice := readInt("Quelle quantité souhaitez vous acheter ? ")
+
+				if player.Money-(consMap[consArr[userChoice2-1]]*quantityChoice) < 0 {
 					fmt.Println("\nVous n'avez pas assez d'argent.")
 				} else {
-					player.Money -= consMap[consArr[userChoice2-1]]
-					fmt.Printf("\nObjet '%s' ajouté à votre inventaire !", consArr[userChoice2-1].Name)
+					player.Money -= consMap[consArr[userChoice2-1]] * quantityChoice
+					fmt.Printf("\nObjet '%s' x %d ajouté à votre inventaire !", consArr[userChoice2-1].Name, quantityChoice)
 					fmt.Printf("\n- %d H. %d restants.", consMap[consArr[userChoice2-1]], player.Money)
-					player.AddInventory(consArr[userChoice2-1])
+					player.AddInventory(consArr[userChoice2-1], quantityChoice)
 				}
 			}
 
