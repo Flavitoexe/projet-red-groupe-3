@@ -4,7 +4,6 @@ import (
 	"bufio"
 	"fmt"
 	"os"
-	"slices"
 	"strconv"
 	"strings"
 	"time"
@@ -184,17 +183,16 @@ func (player *Character) limitInventory(item Item) {
 	}
 }
 
-func (player *Character) AddInventory(item Item) {
+func (player *Character) AddInventory(item Item, quantity int) {
 	player.limitInventory(item)
 	if item.Quantity > 0 && !(item.Tag == "Cons") {
-		fmt.Println(" item.Quantity > 0 && !(item.Tag == Cons)")
 		fmt.Println("Vous avez déjà cet objet.")
 		return
 	}
 
 	for index := range player.Inventory {
 		if player.Inventory[index].Name == item.Name {
-			player.Inventory[index].Quantity++
+			player.Inventory[index].Quantity += quantity
 			fmt.Printf("\nQuantité de %s : %d\n", item.Name, player.Inventory[index].Quantity)
 			return
 		}
@@ -204,7 +202,8 @@ func (player *Character) AddInventory(item Item) {
 func (player *Character) RemoveInventory(item Item) {
 
 	for index := range player.Inventory {
-		if player.Inventory[index].Quantity >= 0 && player.Inventory[index].Quantity-1 >= 0 {
+		// if player.Inventory[index].Quantity >= 0 && player.Inventory[index].Quantity-1 >= 0 {
+		if player.Inventory[index].Quantity != 0 && player.Inventory[index].Name == item.Name {
 			player.Inventory[index].Quantity--
 			fmt.Printf("Nouvelle quantité de %s : %d\n", item.Name, player.Inventory[index].Quantity)
 			return
@@ -213,7 +212,7 @@ func (player *Character) RemoveInventory(item Item) {
 	fmt.Printf("Vous n'avez pas de %s.\n", item.Name)
 }
 
-func (player Character) AccesInventory() {
+func (player *Character) AccesInventory() {
 	var leave bool
 	for !leave {
 		fmt.Println("\n=== Inventaire du personnage ===")
@@ -330,26 +329,26 @@ func (player Character) AccesInventory() {
 }
 
 func (player *Character) takeHealthPot() {
-	potIndex := slices.IndexFunc(player.Inventory, func(items Item) bool {
-		return (items.Name == "Potion de vie" && items.Quantity > 0)
-	})
-	if potIndex == -1 {
-		fmt.Println("Plus de Potion de vie. Allez en acheter au marchand.")
-		return
+
+	for index := range player.Inventory {
+		fmt.Println(index)
+		if player.Inventory[index].Name == "Potion de vie" {
+			if player.Inventory[index].Quantity < 1 {
+				fmt.Println("Plus de Potion de vie. Allez en acheter au marchand.")
+				return
+			}
+
+			player.Hp += 20
+			if player.Hp > player.HpMax {
+
+				player.Hp = player.HpMax
+			}
+
+			fmt.Printf("Vous venez de consommer une potion de soins !\nNouveaux points de vie : %d.\n", player.Hp)
+			player.RemoveInventory(healthPot)
+			break
+		}
 	}
-
-	player.Hp += 50
-	if player.Hp > player.HpMax {
-		player.Hp = player.HpMax
-	}
-	fmt.Printf("Vous utilisez une potion de soin.\nNouveau Hp : %d\n", player.Hp)
-
-	player.RemoveInventory(healthPot)
-	// player.Inventory[potIndex].Quantity -= 1
-
-	// if player.Inventory[potIndex].Quantity <= 0 {
-	// 	player.Inventory = append(player.Inventory[:potIndex], player.Inventory[potIndex+1:]...)
-	// }
 }
 
 func (player *Character) takeStrenghtPot() {
@@ -385,6 +384,7 @@ func (player Character) MainMenu() {
 		fmt.Printf("\t 2 - Inventaire\n")
 		fmt.Printf("\t 3 - Marchand\n")
 		fmt.Printf("\t 4 - Forgeron\n")
+		fmt.Printf("\t 5 - Entraînement\n")
 		fmt.Printf("\t 0 - Quitter\n")
 
 		userChoice := readInt("\nQue souhaitez vous faire ? ")
@@ -398,6 +398,8 @@ func (player Character) MainMenu() {
 			player.AccessShop()
 		case 4:
 			player.MenuForgeron()
+		case 5:
+			TrainingFight(&player)
 		case 0:
 			fmt.Println(Magenta + "\nVous quittez l'aventure.\nMerci pour votre participation !\n(Prochaine fois c'est 10 balles si tu veux lancer le jeu)\n" + Reset)
 			return
@@ -444,7 +446,7 @@ func (player Character) MenuForgeron() {
 		case 1:
 			if player.Money >= 5 {
 				player.Money -= 5
-				player.AddInventory(chapeauAventurier)
+				player.AddInventory(chapeauAventurier, 1)
 				fmt.Println(Green + "\nYoupi! Le forgeron a fabriqué le chapeau de l'aventurier.\n" + Reset)
 
 			} else {
@@ -453,7 +455,7 @@ func (player Character) MenuForgeron() {
 		case 2:
 			if player.Money >= 5 {
 				player.Money -= 5
-				player.AddInventory(tuniqueAventurier)
+				player.AddInventory(tuniqueAventurier, 1)
 				fmt.Println(Green + "\nYoupi! Le forgeron a fabriqué la tunique de l'aventurier.\n" + Reset)
 			} else {
 				fmt.Print(Red + "Oups, vous n'avez pas assez d'argent pour le fabriquer !" + Reset)
@@ -461,7 +463,7 @@ func (player Character) MenuForgeron() {
 		case 3:
 			if player.Money >= 5 {
 				player.Money -= 5
-				player.AddInventory(BottesAventurier)
+				player.AddInventory(BottesAventurier, 1)
 				fmt.Println(Green + "\nYoupi! Le forgeron a fabriqué les bottes de l'aventurier.\n" + Reset)
 			} else {
 				fmt.Print(Red + "Oups, vous n'avez pas assez d'argent pour le fabriquer !" + Reset)

@@ -28,7 +28,8 @@ var arrow Item = Item{"Flèches classiques", 0, "Cons"}
 var poisonedArrow Item = Item{"Flèches empoisonnées", 0, "Cons"}
 
 // Inventaire du joueur
-var inventory []Item = []Item{secretBlade, classicSword, mediumSword, plusSword, rareSword, ultraRareSword, bow, eyeOfDawnBow,
+var inventory []Item = []Item{secretBlade, classicSword, mediumSword, plusSword, rareSword, ultraRareSword,
+	bow, eyeOfDawnBow,
 	shield, uniqueShield, spartanShield,
 	healthPot, strenghtPot, arrow, poisonedArrow}
 
