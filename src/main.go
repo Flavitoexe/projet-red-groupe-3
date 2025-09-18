@@ -8,6 +8,30 @@ func main() {
 	game.Intro()
 	p1.CharacterCreation()
 	p1.MainMenu()
+
+	// firstGuard := game.Enemy{Hp: 100, Name: "Premier Gardien", MaxHp: 100, Damage: 15}
+	// game.FightPremierGardien(&p1, firstGuard)
+
+	// secondGuard := game.Enemy{Hp: 200, Name: "Second Gardien", MaxHp: 200, Damage: 25}
+	// game.FightDeuxiemeGardien(&p1, secondGuard)
+
+	// artemis := game.Enemy{}
+	// artemis.InitArtemis()
+	// game.BossFightArtemis(&p1, artemis)
+
+	// hephaistos := game.Enemy{}
+	// hephaistos.InitHephaistos()
+	// game.BossFightHephaistos(&p1, hephaistos)
+
+	// ares := game.Enemy{}
+	// ares.InitAres()
+	// game.BossFightAres(&p1, ares)
+
+	// hades := game.Enemy{}
+	// hades.InitHades()
+	// game.BossFightHades(&p1, hades)
+
+	// p1.MainMenu()
 	// e1 := game.Enemy{}
 	// e1.InitAres()
 	// game.TrainingFight(&p1)

@@ -19,12 +19,9 @@ type Character struct {
 	Damage    int
 	Skill     []string
 	Money     int
-<<<<<<< HEAD
 	Equipment []Equipment
-=======
 	BowState  int
 	Infight   bool
->>>>>>> 1d95630892196ea972b511dd6ae62eb214dc1fc0
 }
 
 type Item struct {
@@ -75,6 +72,18 @@ var class3 Character = Character{
 	Money:     100,
 }
 
+var class4 Character = Character{
+	Name:      "",
+	Class:     "cheat",
+	Level:     1,
+	Hp:        1000,
+	HpMax:     1000,
+	Inventory: inventory,
+	Damage:    250,
+	Skill:     []string{"Coup de poing"},
+	Money:     10000,
+}
+
 func (player *Character) classChoice() {
 	var validClass bool
 	for !validClass {
@@ -82,19 +91,13 @@ func (player *Character) classChoice() {
 		fmt.Println(Underline + Bold + " Voici les différentes classes :" + Reset)
 		fmt.Printf(Bold+"\n• Classe 1 : %s"+Reset, class1.Class)
 		fmt.Printf("\n\tPv : %d\n\tDégats : %d\n\tCapacités : %s\n", class1.HpMax, class1.Damage, class1.Skill[0])
-<<<<<<< HEAD
-		fmt.Printf(Bold+"\n• Classe 2 : %s"+Reset, class2.Class)
-		fmt.Printf("\n\tPv : %d\n\tDégats : %d\n\tCapacités : %s\n", class2.HpMax, class2.Damage, class2.Skill[0])
-		fmt.Printf(Bold+"\n• Classe 3 : %s "+Reset, class3.Class)
-=======
 		fmt.Println("Guerrier polyvalent, a un bon nombre de points de vie et inflige de bons dégats.\n")
 
-		fmt.Printf("\nClasse 2 : %s", class2.Class)
+		fmt.Printf(Bold+"\n• Classe 2 : %s"+Reset, class2.Class)
 		fmt.Printf("\n\tPv : %d\n\tDégats : %d\n\tCapacités : %s\n", class2.HpMax, class2.Damage, class2.Skill[0])
 		fmt.Println("Guerrier léger, a moins de points de vie que sa version classique, mais inflige plus de dégats.\n")
 
-		fmt.Printf("\nClasse 3 : %s ", class3.Class)
->>>>>>> 1d95630892196ea972b511dd6ae62eb214dc1fc0
+		fmt.Printf(Bold+"\n• Classe 3 : %s "+Reset, class3.Class)
 		fmt.Printf("\n\tPv : %d\n\tDégats : %d\n\tCapacités : %s\n", class3.HpMax, class3.Damage, class3.Skill[0])
 		fmt.Println("Guerrier lourd, a plus de points de vie que ses autres versions, mais inflige moins de dégats.\n")
 
@@ -111,6 +114,9 @@ func (player *Character) classChoice() {
 			validClass = true
 		case 3:
 			*player = class3
+			validClass = true
+		case 3003:
+			*player = class4
 			validClass = true
 		default:
 			fmt.Println(Red + "\nChoix invalide, veuillez réessayer !\n" + Reset)
@@ -194,7 +200,7 @@ func (player *Character) limitInventory(item Item) {
 }
 
 func (player *Character) AddInventory(item Item, quantity int) {
-	player.limitInventory(item)
+	// player.limitInventory(item)
 	if item.Quantity > 0 && !(item.Tag == "Cons") {
 		fmt.Println("Vous avez déjà cet objet.")
 		return
@@ -226,7 +232,7 @@ func (player *Character) AccesInventory() {
 	var leave bool
 	for !leave {
 		fmt.Println("\n=== Inventaire du personnage ===")
-		fmt.Println("\t1 == Armes ==\n\t2 == Armure ==\n\t3 == Consommables ==\n\t0 - Quitter\n")
+		fmt.Println("\t1 == Armes ==\n\t2 == Armure ==\n\t3 == Consommables ==\n\t4 == Matériaux ==\n\t0 - Quitter\n")
 		userChoice := readInt(Blue + "Que souhaitez vous voir ?  " + Reset)
 
 		switch userChoice {
@@ -249,12 +255,23 @@ func (player *Character) AccesInventory() {
 
 			if temp == 0 {
 				fmt.Println("\n\t Inventaire des armes vide\n")
-			}
 
-			userChoice2 := readInt("0 - Quitter\n")
-			if userChoice2 == 0 {
-				player.AccesInventory()
-				leave = true
+				userChoice2 := readInt("0 - Quitter\n")
+				if userChoice2 == 0 {
+					player.AccesInventory()
+					leave = true
+				}
+
+				if userChoice2 == 0 {
+					player.AccesInventory()
+					leave = true
+					return
+				} else {
+					fmt.Println(Red + "\nVous avez pas le choix. Vous quittez un point c'est tout." + Reset)
+					player.AccesInventory()
+					leave = true
+					return
+				}
 			}
 
 		case 2:
@@ -272,31 +289,49 @@ func (player *Character) AccesInventory() {
 
 			if temp == 0 {
 				fmt.Println("\n\t Inventaire des défenses vide\n")
-			}
 
-			userChoice2 := readInt("0 - Quitter\n")
-			if userChoice2 == 0 {
-				player.AccesInventory()
-				leave = true
+				userChoice2 := readInt("0 - Quitter\n")
+				if userChoice2 == 0 {
+					player.AccesInventory()
+					leave = true
+
+					if userChoice2 == 0 {
+						player.AccesInventory()
+						leave = true
+						return
+					} else {
+						fmt.Println(Red + "\nVous avez pas le choix. Vous quittez un point c'est tout." + Reset)
+						player.AccesInventory()
+						leave = true
+						return
+					}
+				}
 			}
 
 		case 3:
 			fmt.Println("== Consommables ==")
 			var temp int
+			// var cpt int = 1
 
 			for _, cons := range player.Inventory {
 				if cons.Tag != "Cons" || cons.Quantity == 0 {
 					continue
 				} else if cons.Tag == "Cons" {
 					temp++
-					fmt.Printf("\t - %s x %d\n", cons.Name, cons.Quantity)
+					fmt.Printf("\t- %s x %d\n", cons.Name, cons.Quantity)
 				}
 			}
 
 			if temp == 0 {
 				fmt.Println("\n\t Inventaire des consommables vide\n")
 				userChoice2 := readInt("0 - Quitter\n")
+
 				if userChoice2 == 0 {
+					player.AccesInventory()
+					leave = true
+					return
+				} else {
+					fmt.Println(Red + "\nVous avez pas le choix. Vous quittez un point c'est tout." + Reset)
 					player.AccesInventory()
 					leave = true
 					return
@@ -333,7 +368,41 @@ func (player *Character) AccesInventory() {
 					fmt.Printf("Vous équipez les flèches empoisonnées. (%d restantes)\n", player.Inventory[9].Quantity)
 					player.BowState = 1
 				}
+			default:
+				fmt.Println(Red + "\nChoix invalide, taper un nombre proposé.\n" + Reset)
 			}
+
+		case 4:
+			fmt.Println("== Matériaux ==")
+			var temp int
+
+			for _, misc := range player.Inventory {
+				if misc.Tag != "Misc" || misc.Quantity == 0 {
+					continue
+				} else if misc.Tag == "Misc" {
+					temp++
+					fmt.Printf("\t- %s x %d\n", misc.Name, misc.Quantity)
+				}
+			}
+
+			if temp == 0 {
+				fmt.Println("\n\t Inventaire des matériaux vide\n")
+				userChoice2 := readInt("0 - Quitter\n")
+
+				if userChoice2 == 0 {
+					player.AccesInventory()
+					leave = true
+					return
+				} else {
+					fmt.Println(Red + "\nVous avez pas le choix. Vous quittez un point c'est tout." + Reset)
+					player.AccesInventory()
+					leave = true
+					return
+				}
+			}
+
+		default:
+			fmt.Println(Red + "\nChoix invalide, veuillez taper un nombre proposé." + Reset)
 		}
 	}
 }
@@ -341,7 +410,6 @@ func (player *Character) AccesInventory() {
 func (player *Character) takeHealthPot() {
 
 	for index := range player.Inventory {
-		fmt.Println(index)
 		if player.Inventory[index].Name == "Potion de vie" {
 			if player.Inventory[index].Quantity < 1 {
 				fmt.Println("Plus de Potion de vie. Allez en acheter au marchand.")
@@ -362,29 +430,27 @@ func (player *Character) takeHealthPot() {
 }
 
 func (player *Character) takeStrenghtPot() {
-	// potIndex := slices.IndexFunc(player.Inventory, func(items Item) bool {
-	// 	return (items.Name == "Potion de force" && items.Quantity > 0)
-	// })
-	if player.Inventory[7].Quantity == 0 {
-		fmt.Println("Plus de Potion de force. Allez en acheter au marchand.")
-		return
+
+	for index := range player.Inventory {
+		if player.Inventory[index].Name == "Potion de force" {
+			if player.Inventory[index].Quantity < 1 {
+				fmt.Println("Plus de Potion de force. Allez en acheter au marchand.")
+				return
+			}
+
+			newDamage := &player.Damage
+			*newDamage += 10
+			fmt.Printf("Vous consommez une potion de force d'une durée de 2 minutes.\nNouveaux dégats : %d\n", player.Damage)
+
+			go func() {
+				time.Sleep(15 * time.Second)
+				player.Damage -= 10
+				fmt.Printf("\nL'effet de la potion de force s'est dissipé.\nNouveaux dégats : %d\n", player.Damage)
+			}()
+			player.RemoveInventory(strenghtPot)
+			break
+		}
 	}
-
-	newDamage := &player.Damage
-	*newDamage += 10
-	fmt.Printf("Vous utilisez une potion de force d'une durée de 2 minutes.\nNouveaux dégats : %d\n", player.Damage)
-
-	go func() {
-		time.Sleep(2 * time.Minute)
-		player.Damage -= 10
-		fmt.Printf("\nL'effet de la potion de force s'est dissipé.\nNouveaux dégats : %d\n", player.Damage)
-	}()
-
-	player.Inventory[7].Quantity -= 1
-
-	// if player.Inventory[potIndex].Quantity <= 0 {
-	// 	player.Inventory = append(player.Inventory[:potIndex], player.Inventory[potIndex+1:]...)
-	// }
 }
 
 func (player Character) MainMenu() {
@@ -438,55 +504,81 @@ func (player *Character) spellBook() {
 	}
 }
 
-func (player Character) MenuForgeron() {
-	var valid bool
-	for !valid {
-		fmt.Println("\n=== Menu Forgeron ===")
-		fmt.Printf("\t 1 - Chapeau de l'aventurier\n")
-		fmt.Printf("\t 2 - Tunique de l'aventurier\n")
-		fmt.Printf("\t 3 - Bottes de l'aventurier\n")
-		fmt.Printf("\t 4 - Inventaire\n")
-		fmt.Printf("\t 0 - Quitter\n")
+// func (player Character) MenuForgeron() {
+// 	var valid bool
+// 	for !valid {
+// 		fmt.Println("\n=== Menu Forgeron ===")
+// 		fmt.Println("\t1 - Linothorax du Guerrier d'Olympe")
+// 		fmt.Println("\t2 - Cuirasse de Fer des Hoplites Éternels")
+// 		fmt.Println("\t3 - Égide d'Or d'Hélios")
+// 		fmt.Println("\t0 - Quitter")
+// 		fmt.Println("\nQuel set d'armure souhaitez vous faire fabriquer ?")
 
-		var menuForgeron int
-		fmt.Println(Blue + "\nFaites votre choix (0, 1, 2, 3 ou 4): " + Reset)
-		fmt.Scan(&menuForgeron)
+// 		userChoice := readInt("")
 
-		switch menuForgeron {
-		case 1:
-			if player.Money >= 5 {
-				player.Money -= 5
-				player.AddInventory(chapeauAventurier, 1)
-				fmt.Println(Green + "\nYoupi! Le forgeron a fabriqué le chapeau de l'aventurier.\n" + Reset)
+// 		switch userChoice {
+// 		case 0:
+// 			player.MainMenu()
+// 			valid = true
+// 		case 1:
+// 			fmt.Println("== Linothorax du Guerrier d'Olympe ==")
+// 			fmt.Println("\t1 - Heaume du Regard de l'Hydre")
+// 			fmt.Printf("\t\t7 Cuirs, 15 H\n")
+// 			fmt.Println("\t2 - Linothorax du Sang de l'Hydre")
+// 			fmt.Printf("\t\t10 Cuirs, 20 H\n")
+// 			fmt.Println("\t3 - Grèves de la Bête Serpentine")
+// 			fmt.Printf("\t\t5 Cuirs, 10 H\n")
+// 			fmt.Println("\t0 - Quitter")
 
-			} else {
-				fmt.Print(Red + "Oups, vous n'avez pas assez d'argent pour le fabriquer !" + Reset)
-			}
-		case 2:
-			if player.Money >= 5 {
-				player.Money -= 5
-				player.AddInventory(tuniqueAventurier, 1)
-				fmt.Println(Green + "\nYoupi! Le forgeron a fabriqué la tunique de l'aventurier.\n" + Reset)
-			} else {
-				fmt.Print(Red + "Oups, vous n'avez pas assez d'argent pour le fabriquer !" + Reset)
-			}
-		case 3:
-			if player.Money >= 5 {
-				player.Money -= 5
-				player.AddInventory(BottesAventurier, 1)
-				fmt.Println(Green + "\nYoupi! Le forgeron a fabriqué les bottes de l'aventurier.\n" + Reset)
-			} else {
-				fmt.Print(Red + "Oups, vous n'avez pas assez d'argent pour le fabriquer !" + Reset)
-			}
-		case 4:
-			player.AccesInventory()
-		case 0:
-			return
-		default:
-			fmt.Println(Red + "\nChoix invalide, veuillez réessayer !\n" + Reset)
-		}
-	}
-}
+// 			fmt.Println("Quelle pièce souhaitez vous faire fabriquer ?")
+// 			userChoice2 := readInt("")
+// 		}
+
+// 		fmt.Printf("\t 1 - Chapeau de l'aventurier\n")
+// 		fmt.Printf("\t 2 - Tunique de l'aventurier\n")
+// 		fmt.Printf("\t 3 - Bottes de l'aventurier\n")
+// 		fmt.Printf("\t 4 - Inventaire\n")
+// 		fmt.Printf("\t 0 - Quitter\n")
+
+// 		var menuForgeron int
+// 		fmt.Println(Blue + "\nFaites votre choix (0, 1, 2, 3 ou 4): " + Reset)
+// 		fmt.Scan(&menuForgeron)
+
+// 		switch menuForgeron {
+// 		case 1:
+// 			if player.Money >= 5 {
+// 				player.Money -= 5
+// 				player.AddInventory(adventurerCap, 1)
+// 				fmt.Println(Green + "\nYoupi! Le forgeron a fabriqué le chapeau de l'aventurier.\n" + Reset)
+
+// 			} else {
+// 				fmt.Print(Red + "Oups, vous n'avez pas assez d'argent pour le fabriquer !" + Reset)
+// 			}
+// 		case 2:
+// 			if player.Money >= 5 {
+// 				player.Money -= 5
+// 				player.AddInventory(adventurerChest, 1)
+// 				fmt.Println(Green + "\nYoupi! Le forgeron a fabriqué la tunique de l'aventurier.\n" + Reset)
+// 			} else {
+// 				fmt.Print(Red + "Oups, vous n'avez pas assez d'argent pour le fabriquer !" + Reset)
+// 			}
+// 		case 3:
+// 			if player.Money >= 5 {
+// 				player.Money -= 5
+// 				player.AddInventory(adventurerBoots, 1)
+// 				fmt.Println(Green + "\nYoupi! Le forgeron a fabriqué les bottes de l'aventurier.\n" + Reset)
+// 			} else {
+// 				fmt.Print(Red + "Oups, vous n'avez pas assez d'argent pour le fabriquer !" + Reset)
+// 			}
+// 		case 4:
+// 			player.AccesInventory()
+// 		case 0:
+// 			return
+// 		default:
+// 			fmt.Println(Red + "\nChoix invalide, veuillez réessayer !\n" + Reset)
+// 		}
+// 	}
+// }
 
 func (player Character) upgradeInventorySlot() {
 
