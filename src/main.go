@@ -8,7 +8,7 @@ func main() {
 	game.Intro()
 	p1.ClassChoice()
 	p1.CharacterCreation()
-	//p1.MainMenu()
+	p1.MainMenu()
 	// e1 := game.Enemy{}
 	// e1.InitEnemy()
 	// game.TrainingFight(p1, e1)

@@ -3,7 +3,7 @@ package game
 import "fmt"
 
 func Intro() {
-	fmt.Print("\nLes dieux, autrefois protecteurs de l'humanité, ont été corrompus par une force maléfique. Notre monde est désormais plongé dans le chaos et seul un héros choisi par le destin peut le sauver. Pour cela il lui faudra les affronter et les tuer. C'est le seul moyen de ramener la paix.\n\n")
+	fmt.Print("\nBienvenue héros, ton voyage commence car le monde a besoin de ton courage. \nEn effet, les dieux, autrefois protecteurs de l'humanité, ont été corrompus par une force maléfique. Notre monde est désormais plongé dans le chaos et seul un héros choisi par le destin peut le sauver. Pour cela il lui faudra les affronter et les tuer. C'est le seul moyen de ramener la paix.\n\n")
 }
 
 func GardinensArtemis() {
@@ -27,7 +27,7 @@ func GardiensArès() {
 }
 
 func DieuArès() {
-	fmt.Print("Devant toi se dresse Arès, dieu de la guerre, incarnation de la rage et du combat. Son regard brûle d’une soif de bataille sans fin. Prépare-toi à un affrontement féroce. Bonne chance à toi.\n\n")
+	fmt.Print("Devant toi se dresse Arès, dieu de la guerre, incarnation de la rage et du combat. Son regard brûle d'une soif de bataille sans fin. Prépare-toi à un affrontement féroce. Bonne chance à toi.\n\n")
 }
 
 func GardiensHadès() {

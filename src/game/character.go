@@ -84,8 +84,8 @@ func (player *Character) ClassChoice() {
 	var validClass bool
 	for !validClass {
 
-		fmt.Println("• Voici les différentes classes :")
-		fmt.Printf("\nClasse 1 : %s", class1.Class)
+		fmt.Println("•" + Underline + " Voici les différentes classes :" + Reset)
+		fmt.Printf(Bold+"\nClasse 1 : %s"+Reset, class1.Class)
 		fmt.Printf("\n\tPv : %d\n\tDégats : %d\n\tCapacités : %s\n", class1.HpMax, class1.Damage, class1.Skill[0])
 		fmt.Printf("\nClasse 2 : %s", class2.Class)
 		fmt.Printf("\n\tPv : %d\n\tDégats : %d\n\tCapacités : %s\n", class2.HpMax, class2.Damage, class2.Skill[0])
@@ -93,7 +93,7 @@ func (player *Character) ClassChoice() {
 		fmt.Printf("\n\tPv : %d\n\tDégats : %d\n\tCapacités : %s\n", class3.HpMax, class3.Damage, class3.Skill[0])
 
 		var classChoice int
-		fmt.Println("\nFaites votre choix (1, 2 ou 3): ")
+		fmt.Println(Blue + "\nFaites votre choix (1, 2 ou 3): " + Reset)
 		fmt.Scan(&classChoice)
 
 		switch classChoice {
@@ -107,7 +107,7 @@ func (player *Character) ClassChoice() {
 			*player = class3
 			validClass = true
 		default:
-			fmt.Println("\nChoix invalide, veuillez réessayer !\n")
+			fmt.Println(Red + "\nChoix invalide, veuillez réessayer !\n" + Reset)
 		}
 	}
 }
@@ -116,13 +116,13 @@ func (player *Character) CharacterCreation() {
 	//player.classChoice()
 	var validName bool
 	for !validName {
-		fmt.Println("\nChoisissez un nom pour votre perso : ")
+		fmt.Println(Blue + "\nChoisissez un nom pour votre perso : " + Reset)
 		var nameChoice string = ""
 		fmt.Scan(&nameChoice)
 
 		for i := 0; i < len(nameChoice); i++ {
 			if !((65 <= nameChoice[i] && nameChoice[i] <= 90) || (97 <= nameChoice[i] && nameChoice[i] <= 122)) {
-				fmt.Println("Oups erreur, votre nom n'est pas correct, veuillez recommencer.")
+				fmt.Println(Red + "Oups erreur, votre nom n'est pas correct, veuillez recommencer." + Reset)
 				validName = false
 				player.Name = ""
 				break
@@ -162,17 +162,17 @@ func readInt(prompt string) int {
 		fmt.Print(prompt)
 		line, err := reader.ReadString('\n')
 		if err != nil {
-			fmt.Println("Erreur de lecture, réessayez.")
+			fmt.Println(Red + "Erreur de lecture, réessayez." + Reset)
 			continue
 		}
 		line = strings.TrimSpace(line)
 		if line == "" {
-			fmt.Println("Choix invalide, veuillez réessayer (Tapez 0, 1 ou 2).")
+			fmt.Println(Red + "Choix invalide, veuillez réessayer (Tapez 0, 1 ou 2)." + Reset)
 			continue
 		}
 		n, err := strconv.Atoi(line)
 		if err != nil {
-			fmt.Println("Entrée invalide, veuillez taper un nombre (ex: 1, 2, 0).")
+			fmt.Println(Red + "Entrée invalide, veuillez taper un nombre (ex: 1, 2, 0)." + Reset)
 			continue
 		}
 		return n
@@ -215,7 +215,7 @@ func (player Character) AccesInventory() {
 	}
 
 	fmt.Println("\n\t1 == Armes ==\n\t2 == Armure ==\n\t3 == Consommables ==\n")
-	userChoice := readInt("\nQue souhaitez vous voir ? ")
+	userChoice := readInt(Blue + "\nQue souhaitez vous voir ? " + Reset)
 
 	switch userChoice {
 
@@ -247,7 +247,7 @@ func (player Character) AccesInventory() {
 			}
 		}
 
-		fmt.Println("\nVoulez vous utiliser un objet ?\n(0 pour sortir, 1 - 2 pour consommer une potion, 3 - 4 pour seléctionner un type de flèche)\n")
+		fmt.Println(Blue + "\nVoulez vous utiliser un objet ?" + Reset + "\n(0 pour sortir, 1 - 2 pour consommer une potion, 3 - 4 pour seléctionner un type de flèche)\n")
 		userChoice2 := readInt("Votre choix : ")
 
 		switch userChoice2 {
@@ -361,7 +361,6 @@ func (player Character) MainMenu() {
 		fmt.Println("\n=== Menu Principal ===")
 		fmt.Printf("\t 1 - Informations du personnage\n")
 		fmt.Printf("\t 2 - Inventaire\n")
-		fmt.Printf("\t 3 - Hagraah\n")
 		fmt.Printf("\t 0 - Quitter\n")
 
 		// var validChoice bool
@@ -394,10 +393,10 @@ func (player Character) MainMenu() {
 		case 2:
 			player.AccesInventory()
 		case 0:
-			fmt.Println("\nVous quittez l'aventure.\nMerci pour votre participation !\n(Prochaine fois c'est 10 balles si tu veux lancer le jeu)")
+			fmt.Println(Magenta + "\nVous quittez l'aventure.\nMerci pour votre participation !\n(Prochaine fois c'est 10 balles si tu veux lancer le jeu)\n" + Reset)
 			return
 		default:
-			fmt.Println("Choix invalide, veuillez réessayer (Tapez 0, 1, 2 ou 3).")
+			fmt.Println(Red + "Choix invalide, veuillez réessayer (Tapez 0, 1 ou 2)." + Reset)
 		}
 	}
 }
@@ -420,3 +419,15 @@ func (player *Character) spellBook() {
 		}
 	}
 }
+
+const (
+	Reset     = "\033[0m"
+	Red       = "\033[31m"
+	Green     = "\033[32m"
+	Yellow    = "\033[33m"
+	Blue      = "\033[34m"
+	Magenta   = "\033[35m"
+	Cyan      = "\033[36m"
+	Bold      = "\033[1m"
+	Underline = "\033[4m"
+)
