@@ -15,6 +15,9 @@ var eyeOfDawnBow Item = Item{"Arc Oeil de l'Aube", 0, "Arme"}
 var shield Item = Item{"Bouclier unique", 0, "Armure"}
 var uniqueShield Item = Item{"Bouclier unique", 0, "Armure"}
 var spartanShield Item = Item{"Bouclier Spartiate", 0, "Armure"}
+var chapeauAventurier Item = Item{"Chapeau de l'aventurier", 0, "Armure"}
+var tuniqueAventurier Item = Item{"Tunique de l'aventurier", 0, "Armure"}
+var BottesAventurier Item = Item{"Bottes de l'aventurier", 0, "Armure"}
 
 // Section Consommables
 var healthPot Item = Item{"Potion de vie", 0, "Cons"}

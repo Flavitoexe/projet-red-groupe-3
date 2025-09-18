@@ -352,6 +352,8 @@ func (player Character) MainMenu() {
 		fmt.Println("\n=== Menu Principal ===")
 		fmt.Printf("\t 1 - Informations du personnage\n")
 		fmt.Printf("\t 2 - Inventaire\n")
+		fmt.Printf("\t 3 - Marchand\n")
+		fmt.Printf("\t 4 - Forgeron\n")
 		fmt.Printf("\t 0 - Quitter\n")
 
 		userChoice := readInt("\nQue souhaitez vous faire ? ")
@@ -363,6 +365,8 @@ func (player Character) MainMenu() {
 			player.AccesInventory()
 		case 3:
 			player.AccessShop()
+		case 4:
+			player.MenuForgeron()
 		case 0:
 			fmt.Println(Magenta + "\nVous quittez l'aventure.\nMerci pour votre participation !\n(Prochaine fois c'est 10 balles si tu veux lancer le jeu)\n" + Reset)
 			return
@@ -387,6 +391,56 @@ func (player *Character) spellBook() {
 			player.Skill = append(player.Skill, "Boule de feu")
 		} else {
 			continue
+		}
+	}
+}
+
+func (player Character) MenuForgeron() {
+	var valid bool
+	for !valid {
+		fmt.Println("\n=== Menu Forgeron ===")
+		fmt.Printf("\t 1 - Chapeau de l'aventurier\n")
+		fmt.Printf("\t 2 - Tunique de l'aventurier\n")
+		fmt.Printf("\t 3 - Bottes de l'aventurier\n")
+		fmt.Printf("\t 4 - Inventaire\n")
+		fmt.Printf("\t 0 - Quitter\n")
+
+		var menuForgeron int
+		fmt.Println(Blue + "\nFaites votre choix (0, 1, 2, 3 ou 4): " + Reset)
+		fmt.Scan(&menuForgeron)
+
+		switch menuForgeron {
+		case 1:
+			if player.Money >= 5 {
+				player.Money -= 5
+				player.AddInventory(chapeauAventurier)
+				fmt.Println(Green + "\nYoupi! Le forgeron a fabriqué le chapeau de l'aventurier.\n" + Reset)
+
+			} else {
+				fmt.Print(Red + "Oups, vous n'avez pas assez d'argent pour le fabriquer !" + Reset)
+			}
+		case 2:
+			if player.Money >= 5 {
+				player.Money -= 5
+				player.AddInventory(tuniqueAventurier)
+				fmt.Println(Green + "\nYoupi! Le forgeron a fabriqué la tunique de l'aventurier.\n" + Reset)
+			} else {
+				fmt.Print(Red + "Oups, vous n'avez pas assez d'argent pour le fabriquer !" + Reset)
+			}
+		case 3:
+			if player.Money >= 5 {
+				player.Money -= 5
+				player.AddInventory(BottesAventurier)
+				fmt.Println(Green + "\nYoupi! Le forgeron a fabriqué les bottes de l'aventurier.\n" + Reset)
+			} else {
+				fmt.Print(Red + "Oups, vous n'avez pas assez d'argent pour le fabriquer !" + Reset)
+			}
+		case 4:
+			player.AccesInventory()
+		case 0:
+			return
+		default:
+			fmt.Println(Red + "\nChoix invalide, veuillez réessayer !\n" + Reset)
 		}
 	}
 }
