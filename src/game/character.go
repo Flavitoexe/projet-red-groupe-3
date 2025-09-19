@@ -521,7 +521,7 @@ func (player *Character) spellBook() {
 // 		fmt.Println("\t2 - Cuirasse de Fer des Hoplites Éternels")
 // 		fmt.Println("\t3 - Égide d'Or d'Hélios")
 // 		fmt.Println("\t0 - Quitter")
-// 		fmt.Println("\nQuel set d'armure souhaitez vous faire fabriquer ?")
+// 		fmt.Println(Blue +"\nQuel set d'armure souhaitez vous faire fabriquer ?\n"+ Reset)
 
 // 		userChoice := readInt("")
 
@@ -539,7 +539,7 @@ func (player *Character) spellBook() {
 // 			fmt.Printf("\t\t5 Cuirs, 10 H\n")
 // 			fmt.Println("\t0 - Quitter")
 
-// 			fmt.Println("Quelle pièce souhaitez vous faire fabriquer ?")
+// 			fmt.Println(Blue + "\nQuelle pièce souhaitez vous faire fabriquer ?\n"+ Reset)
 // 			userChoice2 := readInt("")
 // 		}
 
@@ -561,7 +561,7 @@ func (player *Character) spellBook() {
 // 				fmt.Println(Green + "\nYoupi! Le forgeron a fabriqué le chapeau de l'aventurier.\n" + Reset)
 
 // 			} else {
-// 				fmt.Print(Red + "Oups, vous n'avez pas assez d'argent pour le fabriquer !" + Reset)
+// 				fmt.Print(Red + "\nOups, vous n'avez pas assez d'argent pour le fabriquer !\n" + Reset)
 // 			}
 // 		case 2:
 // 			if player.Money >= 5 {
@@ -569,7 +569,7 @@ func (player *Character) spellBook() {
 // 				player.AddInventory(adventurerChest, 1)
 // 				fmt.Println(Green + "\nYoupi! Le forgeron a fabriqué la tunique de l'aventurier.\n" + Reset)
 // 			} else {
-// 				fmt.Print(Red + "Oups, vous n'avez pas assez d'argent pour le fabriquer !" + Reset)
+// 				fmt.Print(Red + "\nOups, vous n'avez pas assez d'argent pour le fabriquer !\n" + Reset)
 // 			}
 // 		case 3:
 // 			if player.Money >= 5 {
@@ -577,7 +577,7 @@ func (player *Character) spellBook() {
 // 				player.AddInventory(adventurerBoots, 1)
 // 				fmt.Println(Green + "\nYoupi! Le forgeron a fabriqué les bottes de l'aventurier.\n" + Reset)
 // 			} else {
-// 				fmt.Print(Red + "Oups, vous n'avez pas assez d'argent pour le fabriquer !" + Reset)
+// 				fmt.Print(Red + "\nOups, vous n'avez pas assez d'argent pour le fabriquer !\n" + Reset)
 // 			}
 // 		case 4:
 // 			player.AccesInventory()
