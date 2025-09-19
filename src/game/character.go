@@ -503,6 +503,7 @@ func (player *Character) isDead() {
 		fmt.Println(Green + "Tu viens de ressusciter, bonne chance à toi !" + Reset)
 		player.Hp = player.HpMax / 2
 		fmt.Printf("Ton nouveau Hp est : %d\n", player.Hp)
+		player.Resurected = true
 	} else if player.Hp == 0 && player.Resurected {
 		fmt.Println("C'est fini ciao")
 	}
