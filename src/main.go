@@ -3,14 +3,20 @@ package main
 import "projet-red/game"
 
 func main() {
-	p1 := game.Character{}
-	game.Intro()
-	p1.CharacterCreation()
+	//p1 := game.Character{}
+	//game.Intro()
+	//p1.CharacterCreation()
 	// game.DuelRandom(&p1)
+<<<<<<< HEAD
 	// p1.MainMenu()
 	game.DeroulementCombat1(p1)
 	game.DeroulementCombat3(p1)
 	game.DeroulementCombat4(p1)
+=======
+	//p1.MainMenu()
+	game.Perdu()
+	//game.DeroulementCombat1(p1)
+>>>>>>> 94ba245e01d79c90dcb693d939770aa3d03dc422
 
 	// firstGuard := game.Enemy{Hp: 100, Name: "Premier Gardien", MaxHp: 100, Damage: 15}
 	// game.FightPremierGardien(&p1, firstGuard)
