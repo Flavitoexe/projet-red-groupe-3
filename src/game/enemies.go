@@ -49,6 +49,6 @@ func (enemy *Enemy) InitHades() {
 func (enemy Enemy) isDead() {
 	if enemy.Hp == 0 {
 		fmt.Printf("\nVous avez vaincu %s !", enemy.Name)
-		fmt.Printf("\nVous récoltez : '%s' x %d !", enemy.Loot.Name, enemy.Loot.Quantity)
+		fmt.Printf("\nVous récoltez : '%s'!", enemy.Loot.Name, enemy.Loot.Quantity)
 	}
 }

@@ -52,6 +52,7 @@ func DeuxiemeGardien() {
 func VictoirePerso() {
 	FinJeu()
 	fmt.Print(Green + "Tu as gagné. Par ton courage et ta force, tu as libéré les dieux.\n Grâce à toi, la Terre est sauvée.\n Nous te remercions, héros, car c'est toi qui as changé le destin du monde.\n\n" + Reset)
+	PlaySong()
 }
 
 func PerduCombat() {

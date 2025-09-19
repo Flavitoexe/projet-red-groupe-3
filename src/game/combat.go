@@ -159,6 +159,7 @@ func FightPremierGardien(player *Character) {
 	}
 	if firstGuard.Hp <= 0 {
 		PremierGardien()
+		player.Infight = false
 	}
 }
 
@@ -186,6 +187,7 @@ func FightDeuxiemeGardien(player *Character) {
 	}
 	if secondGuard.Hp <= 0 {
 		DeuxiemeGardien()
+		player.Infight = false
 	}
 }
 
@@ -213,6 +215,8 @@ func BossFightArtemis(player *Character) {
 		cptTour++
 	}
 	VaincuDieu()
+	player.Infight = false
+
 }
 
 func BossFightHephaistos(player *Character) {
@@ -238,6 +242,8 @@ func BossFightHephaistos(player *Character) {
 		cptTour++
 	}
 	VaincuDieu()
+	player.Infight = false
+
 }
 
 func BossFightAres(player *Character) {
@@ -264,6 +270,8 @@ func BossFightAres(player *Character) {
 
 	}
 	VaincuDieu()
+	player.Infight = false
+
 }
 
 func BossFightHades(player *Character) {
@@ -289,16 +297,16 @@ func BossFightHades(player *Character) {
 		cptTour++
 	}
 	VictoirePerso()
-	go PlaySong()
+	player.Infight = false
 }
 
 func DeroulementCombat1(player Character) {
 	GardinensArtemis()
 	PremierCombat()
 	FightPremierGardien(&player)
-	if player.Hp > 0 {
+	if player.Hp > 0 && !player.Infight {
 		FightDeuxiemeGardien(&player)
-		if player.Hp > 0 {
+		if player.Hp > 0 && !player.Infight {
 			DieuArtémis()
 			BossFightArtemis(&player)
 		}
@@ -309,9 +317,9 @@ func DeroulementCombat2(player Character) {
 	GardiensHéphaïstos()
 	PremierCombat()
 	FightPremierGardien(&player)
-	if player.Hp > 0 {
+	if player.Hp > 0 && !player.Infight {
 		FightDeuxiemeGardien(&player)
-		if player.Hp > 0 {
+		if player.Hp > 0 && !player.Infight {
 			DieuHéphaïstos()
 			BossFightHephaistos(&player)
 
@@ -323,9 +331,9 @@ func DeroulementCombat3(player Character) {
 	GardiensArès()
 	PremierCombat()
 	FightPremierGardien(&player)
-	if player.Hp > 0 {
+	if player.Hp > 0 && !player.Infight {
 		FightDeuxiemeGardien(&player)
-		if player.Hp > 0 {
+		if player.Hp > 0 && !player.Infight {
 			DieuArès()
 			BossFightAres(&player)
 		}
@@ -336,12 +344,11 @@ func DeroulementCombat4(player Character) {
 	GardiensHadès()
 	PremierCombat()
 	FightPremierGardien(&player)
-	if player.Hp > 0 {
+	if player.Hp > 0 && !player.Infight {
 		FightDeuxiemeGardien(&player)
-		if player.Hp > 0 {
+		if player.Hp > 0 && !player.Infight {
 			DieuHadès()
 			BossFightHades(&player)
-
 		}
 	}
 }
