@@ -10,7 +10,7 @@ func enemyPattern(player *Character, enemy *Enemy, turn int) {
 		fmt.Printf(Red+"\n%s utilise son attaque spéciale et vous inflige %d dégats !\n"+Reset, enemy.Name, 2*10)
 		player.Hp -= 2 * enemy.Damage
 	} else if turn < 4 {
-		fmt.Printf("%s vous inflige %d dégats !\n", enemy.Name, enemy.Damage)
+		fmt.Printf("\n%s vous inflige %d dégats !\n", enemy.Name, enemy.Damage)
 		fmt.Printf(Red+"\nAttention !! Plus que %d tours avant que %s n'utilise son attaque spéciale !\n"+Reset, 3-turn, enemy.Name)
 		player.Hp -= enemy.Damage
 	} else {
@@ -72,7 +72,7 @@ func TrainingFight(player *Character) {
 		}
 
 		player.isDead()
-		enemy.isDead()
+		player.enemyDead(enemy)
 		cptTour++
 	}
 
@@ -108,7 +108,7 @@ func DuelRandom(player *Character) {
 		}
 
 		player.isDead()
-		enemy.isDead()
+		player.enemyDead(enemy)
 		cptTour++
 	}
 }
@@ -131,7 +131,7 @@ func Duel(player *Character, enemy Enemy) {
 		}
 
 		player.isDead()
-		enemy.isDead()
+		player.enemyDead(enemy)
 		cptTour++
 	}
 }
@@ -155,6 +155,7 @@ func FightPremierGardien(player *Character) {
 		}
 
 		player.isDead()
+		player.guardDead(firstGuard)
 		cptTour++
 	}
 	if firstGuard.Hp <= 0 {
@@ -183,6 +184,7 @@ func FightDeuxiemeGardien(player *Character) {
 		}
 
 		player.isDead()
+		player.guardDead(secondGuard)
 		cptTour++
 	}
 	if secondGuard.Hp <= 0 {
@@ -211,7 +213,7 @@ func BossFightArtemis(player *Character) {
 		}
 
 		player.isDead()
-		artemis.isDead()
+		player.bossDead(artemis)
 		cptTour++
 	}
 	VaincuDieu()
@@ -238,7 +240,7 @@ func BossFightHephaistos(player *Character) {
 		}
 
 		player.isDead()
-		hephaistos.isDead()
+		player.bossDead(hephaistos)
 		cptTour++
 	}
 	VaincuDieu()
@@ -265,7 +267,7 @@ func BossFightAres(player *Character) {
 		}
 
 		player.isDead()
-		ares.isDead()
+		player.bossDead(ares)
 		cptTour++
 
 	}
@@ -293,7 +295,7 @@ func BossFightHades(player *Character) {
 		}
 
 		player.isDead()
-		hades.isDead()
+		player.bossDead(hades)
 		cptTour++
 	}
 	VictoirePerso()

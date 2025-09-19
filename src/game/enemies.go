@@ -1,6 +1,9 @@
 package game
 
-import "fmt"
+import (
+	"fmt"
+	"math/rand"
+)
 
 type Enemy struct {
 	Name   string
@@ -46,9 +49,23 @@ func (enemy *Enemy) InitHades() {
 	*enemy = Enemy{"Hadès", 400, 400, 60, gold}
 }
 
-func (enemy Enemy) isDead() {
+func (player *Character) enemyDead(enemy Enemy) {
 	if enemy.Hp == 0 {
 		fmt.Printf("\nVous avez vaincu %s !", enemy.Name)
-		fmt.Printf("\nVous récoltez : '%s'!", enemy.Loot.Name, enemy.Loot.Quantity)
+		fmt.Printf("\nVous récoltez : %d !", rand.Intn(10))
+	}
+}
+
+func (player *Character) guardDead(guard Enemy) {
+	if guard.Hp == 0 {
+		fmt.Printf("\nVous avez vaincu %s !", guard.Name)
+		fmt.Printf("\nVous récoltez : %d !", rand.Intn(50-25+1)+25)
+	}
+}
+
+func (player *Character) bossDead(boss Enemy) {
+	if boss.Hp == 0 {
+		fmt.Printf("\nVous avez vaincu %s !", boss.Name)
+		fmt.Printf("\nVous récoltez : %d !", 100)
 	}
 }

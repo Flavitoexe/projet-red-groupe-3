@@ -501,6 +501,8 @@ func (player Character) MainMenu() {
 		fmt.Printf("\t 3 - Marchand\n")
 		fmt.Printf("\t 4 - Forgeron\n")
 		fmt.Printf("\t 5 - Entraînement\n")
+		fmt.Printf("\t 6 - Chercher la bagarre\n")
+		fmt.Printf("\t 7 - Sauver le monde\n")
 		fmt.Printf("\t 0 - Quitter\n")
 
 		var menuChoice int
@@ -518,6 +520,29 @@ func (player Character) MainMenu() {
 			player.MenuForgeron()
 		case 5:
 			TrainingFight(&player)
+		case 6:
+			DuelRandom(&player)
+		case 7:
+			fmt.Println("\n=== Sauver le monde ===")
+			fmt.Println("\t1 - Artemis")
+			fmt.Println("\t2 - Héphaïstos")
+			fmt.Println("\t3 - Arès")
+			fmt.Println("\t4 - Hadès\n")
+			fmt.Println("\t0 - Quitter\n")
+			userChoice2 := readInt("Qui allez vous affronter ? ")
+
+			switch userChoice2 {
+			case 0:
+				return
+			case 1:
+				DeroulementCombat1(player)
+			case 2:
+				DeroulementCombat2(player)
+			case 3:
+				DeroulementCombat3(player)
+			case 4:
+				DeroulementCombat4(player)
+			}
 		case 0:
 			fmt.Println(Magenta + "\nVous quittez l'aventure.\nMerci pour votre participation !\n(Prochaine fois c'est 10 balles si tu veux lancer le jeu)\n" + Reset)
 			return
