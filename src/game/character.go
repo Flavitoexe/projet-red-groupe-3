@@ -272,7 +272,7 @@ func (player *Character) AccesInventory() {
 	for !leave {
 		fmt.Println("\n=== Inventaire du personnage ===")
 		fmt.Println("\t1 == Armes ==\n\t2 == Armure ==\n\t3 == Consommables ==\n\t4 == Matériaux ==\n\t0 - Quitter\n")
-		userChoice := readInt(Blue + "Que souhaitez vous voir ?  " + Reset)
+		userChoice := readInt(Blue + "Que souhaitez vous voir ?  \n" + Reset)
 
 		switch userChoice {
 
