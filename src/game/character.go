@@ -10,18 +10,19 @@ import (
 )
 
 type Character struct {
-	Name      string
-	Class     string
-	Level     int
-	Hp        int
-	HpMax     int
-	Inventory []Item
-	Damage    int
-	Skill     []string
-	Money     int
-	Equipment []Equipment
-	BowState  int
-	Infight   bool
+	Name       string
+	Class      string
+	Level      int
+	Hp         int
+	HpMax      int
+	Inventory  []Item
+	Damage     int
+	Skill      []string
+	Money      int
+	Equipment  []Equipment
+	BowState   int
+	Infight    bool
+	Resurected bool
 }
 
 type Item struct {
@@ -31,9 +32,10 @@ type Item struct {
 }
 
 type Equipment struct {
-	Casque string
-	Body   string
-	Foot   string
+	Casque     Item
+	Body       Item
+	Foot       Item
+	IsEquipped bool
 }
 
 var class1 Character = Character{
@@ -490,11 +492,14 @@ func (player Character) MainMenu() {
 }
 
 func (player *Character) isDead() {
-	if player.Hp == 0 {
+	if player.Hp == 0 && !player.Resurected {
 		fmt.Println(Cyan + "\n\nTu es mort, repenses-y à deux fois la prochaine fois.\n" + Reset)
 		fmt.Println(Green + "Tu viens de ressusciter, bonne chance à toi !" + Reset)
 		player.Hp = player.HpMax / 2
 		fmt.Printf("Ton nouveau Hp est : %d\n", player.Hp)
+		player.Resurected = true
+	} else if player.Hp == 0 && player.Resurected {
+		fmt.Println("C'est fini ciao")
 	}
 }
 
@@ -583,6 +588,8 @@ func (player *Character) spellBook() {
 // 		}
 // 	}
 // }
+
+// func (player Character) IsEquipped()
 
 func (player Character) upgradeInventorySlot() {
 

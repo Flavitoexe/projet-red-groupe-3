@@ -37,7 +37,7 @@ func (player *Character) AccessShop() {
 
 				} else {
 					player.Money -= weaponMap[weaponArr[userChoice2-1]]
-					fmt.Printf("\nObjet '%s' ajouté à votre inventaire !", weaponArr[userChoice2-1].Name)
+					fmt.Printf("\n%s ajouté à votre inventaire !", weaponArr[userChoice2-1].Name)
 					fmt.Printf("\n- %d H. %d restants.", weaponMap[weaponArr[userChoice2-1]], player.Money)
 					player.AddInventory(weaponArr[userChoice2-1], 1)
 				}
@@ -62,7 +62,7 @@ func (player *Character) AccessShop() {
 					fmt.Println("\nVous n'avez pas assez d'argent.")
 				} else {
 					player.Money -= defenseMap[defenseArr[userChoice2-1]]
-					fmt.Printf("\nObjet '%s' ajouté à votre inventaire !", defenseArr[userChoice2-1].Name)
+					fmt.Printf("\n%s ajouté à votre inventaire !", defenseArr[userChoice2-1].Name)
 					fmt.Printf("\n- %d H. %d restants.", defenseMap[defenseArr[userChoice2-1]], player.Money)
 					player.AddInventory(defenseArr[userChoice2-1], 1)
 				}
@@ -90,7 +90,7 @@ func (player *Character) AccessShop() {
 					fmt.Println("\nVous n'avez pas assez d'argent.")
 				} else {
 					player.Money -= consMap[consArr[userChoice2-1]] * quantityChoice
-					fmt.Printf("\nObjet '%s' x %d ajouté à votre inventaire !", consArr[userChoice2-1].Name, quantityChoice)
+					fmt.Printf("\n%s x %d ajouté à votre inventaire !", consArr[userChoice2-1].Name, quantityChoice)
 					fmt.Printf("\n- %d H. %d restants.", consMap[consArr[userChoice2-1]]*quantityChoice, player.Money)
 					player.AddInventory(consArr[userChoice2-1], quantityChoice)
 				}
@@ -118,7 +118,7 @@ func (player *Character) AccessShop() {
 					fmt.Println("\nVous n'avez pas assez d'argent.")
 				} else {
 					player.Money -= miscMap[miscArr[userChoice2-1]] * quantityChoice
-					fmt.Printf("\nObjet '%s' x %d ajouté à votre inventaire !", miscArr[userChoice2-1].Name, quantityChoice)
+					fmt.Printf("\n%s x %d ajouté à votre inventaire !", miscArr[userChoice2-1].Name, quantityChoice)
 					fmt.Printf("\n- %d H. %d restants.", miscMap[miscArr[userChoice2-1]]*quantityChoice, player.Money)
 					player.AddInventory(miscArr[userChoice2-1], quantityChoice)
 				}
