@@ -16,13 +16,13 @@ var shield Item = Item{"Bouclier unique", 0, "Armure"}
 var uniqueShield Item = Item{"Bouclier unique", 0, "Armure"}
 var spartanShield Item = Item{"Bouclier Spartiate", 0, "Armure"}
 var leatherCap Item = Item{"Heaume du Regard de l'Hydre", 0, "Armure"}
-var leatherChest Item = Item{"Tunique de l'aventurier", 0, "Armure"}
+var leatherChest Item = Item{"Linothorax du Sang de l’Hydre", 0, "Armure"}
 var leatherBoots Item = Item{"Bottes de l'aventurier", 0, "Armure"}
 var ironCap Item = Item{"Heaume des Cent Yeux", 0, "Armure"}
 var ironChest Item = Item{"Cuirasse de Fer de l'Hécatonchire", 0, "Armure"}
 var ironBoots Item = Item{"Grèves des Cent Pas", 0, "Armure"}
 var goldCap Item = Item{"Couronne Solaire d'Hélios", 0, "Armure"}
-var goldChest Item = Item{"Égide d’Hélios", 0, "Armure"}
+var goldChest Item = Item{"Égide d'Hélios", 0, "Armure"}
 var goldBoots Item = Item{"Sandales Flamboyantes du Soleil", 0, "Armure"}
 
 // Section Consommables
