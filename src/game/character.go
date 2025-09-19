@@ -10,18 +10,19 @@ import (
 )
 
 type Character struct {
-	Name      string
-	Class     string
-	Level     int
-	Hp        int
-	HpMax     int
-	Inventory []Item
-	Damage    int
-	Skill     []string
-	Money     int
-	Equipment []Equipment
-	BowState  int
-	Infight   bool
+	Name       string
+	Class      string
+	Level      int
+	Hp         int
+	HpMax      int
+	Inventory  []Item
+	Damage     int
+	Skill      []string
+	Money      int
+	Equipment  []Equipment
+	BowState   int
+	Infight    bool
+	Resurected bool
 }
 
 type Item struct {
@@ -31,9 +32,10 @@ type Item struct {
 }
 
 type Equipment struct {
-	Casque string
-	Body   string
-	Foot   string
+	Casque     Item
+	Body       Item
+	Foot       Item
+	IsEquipped bool
 }
 
 var class1 Character = Character{
@@ -91,17 +93,12 @@ func (player *Character) classChoice() {
 		fmt.Println(Underline + Bold + " Voici les différentes classes :" + Reset)
 		fmt.Printf(Bold+"\n• Classe 1 : %s"+Reset, class1.Class)
 		fmt.Printf("\n\tPv : %d\n\tDégats : %d\n\tCapacités : %s\n", class1.HpMax, class1.Damage, class1.Skill[0])
-<<<<<<< HEAD
 		fmt.Println("Guerrier polyvalent, a un bon nombre de points de vie et inflige de bons dégats.\n")
 
 		fmt.Printf(Bold+"\n• Classe 2 : %s"+Reset, class2.Class)
 		fmt.Printf("\n\tPv : %d\n\tDégats : %d\n\tCapacités : %s\n", class2.HpMax, class2.Damage, class2.Skill[0])
 		fmt.Println("Guerrier léger, a moins de points de vie que sa version classique, mais inflige plus de dégats.\n")
 
-=======
-		fmt.Printf(Bold+"\n• Classe 2 : %s"+Reset, class2.Class)
-		fmt.Printf("\n\tPv : %d\n\tDégats : %d\n\tCapacités : %s\n", class2.HpMax, class2.Damage, class2.Skill[0])
->>>>>>> 67e49c7fe266e4c95f4c98a2f9a66103c7fd28da
 		fmt.Printf(Bold+"\n• Classe 3 : %s "+Reset, class3.Class)
 		fmt.Printf("\n\tPv : %d\n\tDégats : %d\n\tCapacités : %s\n", class3.HpMax, class3.Damage, class3.Skill[0])
 		fmt.Println("Guerrier lourd, a plus de points de vie que ses autres versions, mais inflige moins de dégats.\n")
@@ -122,13 +119,9 @@ func (player *Character) classChoice() {
 		case 3:
 			*player = class3
 			validClass = true
-<<<<<<< HEAD
 		case 3003:
 			*player = class4
 			validClass = true
-=======
-			return
->>>>>>> 67e49c7fe266e4c95f4c98a2f9a66103c7fd28da
 		default:
 			fmt.Println(Red + "\nChoix invalide, veuillez réessayer !\n" + Reset)
 			return
@@ -248,13 +241,8 @@ func (player *Character) AccesInventory() {
 	var leave bool
 	for !leave {
 		fmt.Println("\n=== Inventaire du personnage ===")
-<<<<<<< HEAD
 		fmt.Println("\t1 == Armes ==\n\t2 == Armure ==\n\t3 == Consommables ==\n\t4 == Matériaux ==\n\t0 - Quitter\n")
 		userChoice := readInt(Blue + "Que souhaitez vous voir ?  " + Reset)
-=======
-		fmt.Println("\t1 == Armes ==\n\t2 == Armure ==\n\t3 == Consommables ==\n\t0 - Quitter\n")
-		userChoice := readInt(Blue + "Que souhaitez vous voir ? \n " + Reset)
->>>>>>> 67e49c7fe266e4c95f4c98a2f9a66103c7fd28da
 
 		switch userChoice {
 
@@ -510,11 +498,13 @@ func (player Character) MainMenu() {
 }
 
 func (player *Character) isDead() {
-	if player.Hp == 0 {
+	if player.Hp == 0 && !player.Resurected {
 		fmt.Println(Cyan + "\n\nTu es mort, repenses-y à deux fois la prochaine fois.\n" + Reset)
 		fmt.Println(Green + "Tu viens de ressusciter, bonne chance à toi !" + Reset)
 		player.Hp = player.HpMax / 2
 		fmt.Printf("Ton nouveau Hp est : %d\n", player.Hp)
+	} else if player.Hp == 0 && player.Resurected {
+		fmt.Println("C'est fini ciao")
 	}
 }
 
@@ -603,6 +593,8 @@ func (player *Character) spellBook() {
 // 		}
 // 	}
 // }
+
+// func (player Character) IsEquipped()
 
 func (player Character) upgradeInventorySlot() {
 

@@ -29,13 +29,8 @@ func characterTurn(enemy *Enemy, player *Character) {
 
 		switch userChoice {
 		case 1:
-<<<<<<< HEAD
 			enemy.Hp -= player.Damage
 			fmt.Printf("%s exécute une attaque basique et inflige %d dégats à %s !", player.Name, player.Damage, enemy.Name)
-=======
-			enemy.Hp -= 10
-			fmt.Printf("%s exécute une attaque basique et inflige %d dégats à %s !\n", player.Name, 10, enemy.Name)
->>>>>>> 67e49c7fe266e4c95f4c98a2f9a66103c7fd28da
 			leave = true
 		case 2:
 			player.AccesInventory()
