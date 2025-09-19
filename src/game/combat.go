@@ -355,6 +355,7 @@ func DeroulementCombat4(player Character) {
 			BossFightHades(&player)
 			if player.Hp > 0 {
 				VictoirePerso()
+				go PlaySong()
 			}
 		}
 	}
