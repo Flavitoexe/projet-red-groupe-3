@@ -4,7 +4,6 @@ import "projet-red/game"
 
 func main() {
 	p1 := game.Character{}
-	game.Logo()
 	game.Intro()
 	p1.CharacterCreation()
 	p1.MainMenu()

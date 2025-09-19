@@ -29,13 +29,8 @@ func characterTurn(enemy *Enemy, player *Character) {
 
 		switch userChoice {
 		case 1:
-<<<<<<< HEAD
 			enemy.Hp -= player.Damage
 			fmt.Printf("%s exécute une attaque basique et inflige %d dégats à %s !", player.Name, player.Damage, enemy.Name)
-=======
-			enemy.Hp -= 10
-			fmt.Printf("%s exécute une attaque basique et inflige %d dégats à %s !\n", player.Name, 10, enemy.Name)
->>>>>>> 67e49c7fe266e4c95f4c98a2f9a66103c7fd28da
 			leave = true
 		case 2:
 			player.AccesInventory()
@@ -236,5 +231,77 @@ func BossFightHades(player *Character, hades Enemy) {
 		player.isDead()
 		hades.isDead()
 		cptTour++
+	}
+}
+
+func DeroulementCombat1(player Character) {
+	GardinensArtemis()
+	PremierCombat()
+	FightPremierGardien(player)
+	if player.Hp > 0 {
+		PremierGardien()
+		FightDeuxiemeGardien(player)
+		if player.Hp > 0 {
+			DeuxiemeGardien()
+			DieuArtémis()
+			BossFightArtemis(player)
+			if player.Hp > 0 {
+				VaincuDieu()
+			}
+		}
+	}
+}
+
+func DeroulementCombat2(player Character) {
+	GardiensHéphaïstos()
+	PremierCombat()
+	FightPremierGardien(player)
+	if player.Hp > 0 {
+		PremierGardien()
+		FightDeuxiemeGardien(player)
+		if player.Hp > 0 {
+			DeuxiemeGardien()
+			DieuHéphaïstos()
+			BossFightHephaistos(player)
+			if player.Hp > 0 {
+				VaincuDieu()
+			}
+		}
+	}
+}
+
+func DeroulementCombat3(player Character) {
+	GardiensArès()
+	PremierCombat()
+	FightPremierGardien(player)
+	if player.Hp > 0 {
+		PremierGardien()
+		FightDeuxiemeGardien(player)
+		if player.Hp > 0 {
+			DeuxiemeGardien()
+			DieuArès()
+			BossFightAres(player)
+			if player.Hp > 0 {
+				VaincuDieu()
+			}
+		}
+	}
+}
+
+func DeroulementCombat4(player Character) {
+	GardiensHadès()
+	PremierCombat()
+	FightPremierGardien(player)
+	if player.Hp > 0 {
+		PremierGardien()
+		FightDeuxiemeGardien(player)
+		if player.Hp > 0 {
+			DeuxiemeGardien()
+			DieuHadès()
+			BossFightHades(player)
+			if player.Hp > 0 {
+				VictoirePerso()
+			}
+		}
 	}
 }

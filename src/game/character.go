@@ -91,17 +91,12 @@ func (player *Character) classChoice() {
 		fmt.Println(Underline + Bold + " Voici les différentes classes :" + Reset)
 		fmt.Printf(Bold+"\n• Classe 1 : %s"+Reset, class1.Class)
 		fmt.Printf("\n\tPv : %d\n\tDégats : %d\n\tCapacités : %s\n", class1.HpMax, class1.Damage, class1.Skill[0])
-<<<<<<< HEAD
 		fmt.Println("Guerrier polyvalent, a un bon nombre de points de vie et inflige de bons dégats.\n")
 
 		fmt.Printf(Bold+"\n• Classe 2 : %s"+Reset, class2.Class)
 		fmt.Printf("\n\tPv : %d\n\tDégats : %d\n\tCapacités : %s\n", class2.HpMax, class2.Damage, class2.Skill[0])
 		fmt.Println("Guerrier léger, a moins de points de vie que sa version classique, mais inflige plus de dégats.\n")
 
-=======
-		fmt.Printf(Bold+"\n• Classe 2 : %s"+Reset, class2.Class)
-		fmt.Printf("\n\tPv : %d\n\tDégats : %d\n\tCapacités : %s\n", class2.HpMax, class2.Damage, class2.Skill[0])
->>>>>>> 67e49c7fe266e4c95f4c98a2f9a66103c7fd28da
 		fmt.Printf(Bold+"\n• Classe 3 : %s "+Reset, class3.Class)
 		fmt.Printf("\n\tPv : %d\n\tDégats : %d\n\tCapacités : %s\n", class3.HpMax, class3.Damage, class3.Skill[0])
 		fmt.Println("Guerrier lourd, a plus de points de vie que ses autres versions, mais inflige moins de dégats.\n")
@@ -114,21 +109,15 @@ func (player *Character) classChoice() {
 		case 1:
 			*player = class1
 			validClass = true
-			return
 		case 2:
 			*player = class2
 			validClass = true
-			return
 		case 3:
 			*player = class3
 			validClass = true
-<<<<<<< HEAD
 		case 3003:
 			*player = class4
 			validClass = true
-=======
-			return
->>>>>>> 67e49c7fe266e4c95f4c98a2f9a66103c7fd28da
 		default:
 			fmt.Println(Red + "\nChoix invalide, veuillez réessayer !\n" + Reset)
 			return
@@ -154,19 +143,15 @@ func (player *Character) CharacterCreation() {
 				if (65 <= nameChoice[i] && nameChoice[i] <= 90) && i != 0 {
 					player.Name += string(nameChoice[i] + 32)
 					validName = true
-					break
 				} else if (97 <= nameChoice[i] && nameChoice[i] <= 122) && i != 0 {
 					player.Name += string(nameChoice[i])
 					validName = true
-					break
 				} else if (97 <= nameChoice[i] && nameChoice[i] <= 122) && i == 0 {
 					validName = true
 					player.Name += string(nameChoice[i] - 32)
-					break
 				} else if (65 <= nameChoice[i] && nameChoice[i] <= 90) && i == 0 {
 					validName = true
 					player.Name += string(nameChoice[i])
-					break
 				}
 			}
 		}
@@ -248,13 +233,8 @@ func (player *Character) AccesInventory() {
 	var leave bool
 	for !leave {
 		fmt.Println("\n=== Inventaire du personnage ===")
-<<<<<<< HEAD
 		fmt.Println("\t1 == Armes ==\n\t2 == Armure ==\n\t3 == Consommables ==\n\t4 == Matériaux ==\n\t0 - Quitter\n")
 		userChoice := readInt(Blue + "Que souhaitez vous voir ?  " + Reset)
-=======
-		fmt.Println("\t1 == Armes ==\n\t2 == Armure ==\n\t3 == Consommables ==\n\t0 - Quitter\n")
-		userChoice := readInt(Blue + "Que souhaitez vous voir ? \n " + Reset)
->>>>>>> 67e49c7fe266e4c95f4c98a2f9a66103c7fd28da
 
 		switch userChoice {
 
