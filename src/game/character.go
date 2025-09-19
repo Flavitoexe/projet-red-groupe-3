@@ -41,7 +41,7 @@ type Equipment struct {
 
 var class1 Character = Character{
 	Name:      "",
-	Class:     "Guerrier",
+	Class:     "Guerrier moyen",
 	Level:     1,
 	Hp:        50,
 	HpMax:     100,
@@ -98,7 +98,7 @@ func (player *Character) classChoice() {
 		fmt.Println(Underline + Bold + " Voici les différentes classes :" + Reset)
 		fmt.Printf(Bold+"\n• Classe 1 : %s"+Reset, class1.Class)
 		fmt.Printf("\n\tPv : %d\n\tDégats : %d\n\tCapacités : %s\n", class1.HpMax, class1.Damage, class1.Skill[0])
-		fmt.Println("Guerrier polyvalent, a un bon nombre de points de vie et inflige de bons dégats.\n")
+		fmt.Println("Guerrier moyen, a un bon nombre de points de vie et inflige de bons dégats.\n")
 
 		fmt.Printf(Bold+"\n• Classe 2 : %s"+Reset, class2.Class)
 		fmt.Printf("\n\tPv : %d\n\tDégats : %d\n\tCapacités : %s\n", class2.HpMax, class2.Damage, class2.Skill[0])

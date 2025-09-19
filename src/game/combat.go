@@ -134,8 +134,10 @@ func Duel(player *Character, enemy Enemy) {
 	}
 }
 
-func FightPremierGardien(player *Character, firstGuard Enemy) {
+func FightPremierGardien(player *Character) {
 
+	firstGuard := Enemy{}
+	firstGuard.InitFirstGuard()
 	player.Infight = true
 	cptTour := 1
 
@@ -158,8 +160,11 @@ func FightPremierGardien(player *Character, firstGuard Enemy) {
 	}
 }
 
-func FightDeuxiemeGardien(player *Character, secondGuard Enemy) {
+func FightDeuxiemeGardien(player *Character) {
 
+	secondGuard := Enemy{}
+	secondGuard.InitSecondGuard()
+	DeuxiemeGardien()
 	player.Infight = true
 	cptTour := 1
 
@@ -182,8 +187,11 @@ func FightDeuxiemeGardien(player *Character, secondGuard Enemy) {
 	}
 }
 
-func BossFightArtemis(player *Character, artemis Enemy) {
+func BossFightArtemis(player *Character) {
 	// FightPremierGardien()
+
+	artemis := Enemy{}
+	artemis.InitArtemis()
 	DieuArtémis()
 	player.Infight = true
 	cptTour := 1
@@ -205,7 +213,10 @@ func BossFightArtemis(player *Character, artemis Enemy) {
 	}
 }
 
-func BossFightHephaistos(player *Character, hephaistos Enemy) {
+func BossFightHephaistos(player *Character) {
+
+	hephaistos := Enemy{}
+	hephaistos.InitHephaistos()
 	DieuHéphaïstos()
 	player.Infight = true
 	cptTour := 1
@@ -227,7 +238,10 @@ func BossFightHephaistos(player *Character, hephaistos Enemy) {
 	}
 }
 
-func BossFightAres(player *Character, ares Enemy) {
+func BossFightAres(player *Character) {
+
+	ares := Enemy{}
+	ares.InitAres()
 	DieuArès()
 	player.Infight = true
 	cptTour := 1
@@ -249,7 +263,10 @@ func BossFightAres(player *Character, ares Enemy) {
 	}
 }
 
-func BossFightHades(player *Character, hades Enemy) {
+func BossFightHades(player *Character) {
+
+	hades := Enemy{}
+	hades.InitHades()
 	DieuHadès()
 	player.Infight = true
 	cptTour := 1
@@ -274,14 +291,14 @@ func BossFightHades(player *Character, hades Enemy) {
 func DeroulementCombat1(player Character) {
 	GardinensArtemis()
 	PremierCombat()
-	FightPremierGardien(player)
+	FightPremierGardien(&player)
 	if player.Hp > 0 {
 		PremierGardien()
-		FightDeuxiemeGardien(player)
+		FightDeuxiemeGardien(&player)
 		if player.Hp > 0 {
 			DeuxiemeGardien()
 			DieuArtémis()
-			BossFightArtemis(player)
+			BossFightArtemis(&player)
 			if player.Hp > 0 {
 				VaincuDieu()
 			}
@@ -292,14 +309,14 @@ func DeroulementCombat1(player Character) {
 func DeroulementCombat2(player Character) {
 	GardiensHéphaïstos()
 	PremierCombat()
-	FightPremierGardien(player)
+	FightPremierGardien(&player)
 	if player.Hp > 0 {
 		PremierGardien()
-		FightDeuxiemeGardien(player)
+		FightDeuxiemeGardien(&player)
 		if player.Hp > 0 {
 			DeuxiemeGardien()
 			DieuHéphaïstos()
-			BossFightHephaistos(player)
+			BossFightHephaistos(&player)
 			if player.Hp > 0 {
 				VaincuDieu()
 			}
@@ -310,14 +327,14 @@ func DeroulementCombat2(player Character) {
 func DeroulementCombat3(player Character) {
 	GardiensArès()
 	PremierCombat()
-	FightPremierGardien(player)
+	FightPremierGardien(&player)
 	if player.Hp > 0 {
 		PremierGardien()
-		FightDeuxiemeGardien(player)
+		FightDeuxiemeGardien(&player)
 		if player.Hp > 0 {
 			DeuxiemeGardien()
 			DieuArès()
-			BossFightAres(player)
+			BossFightAres(&player)
 			if player.Hp > 0 {
 				VaincuDieu()
 			}
@@ -328,14 +345,14 @@ func DeroulementCombat3(player Character) {
 func DeroulementCombat4(player Character) {
 	GardiensHadès()
 	PremierCombat()
-	FightPremierGardien(player)
+	FightPremierGardien(&player)
 	if player.Hp > 0 {
 		PremierGardien()
-		FightDeuxiemeGardien(player)
+		FightDeuxiemeGardien(&player)
 		if player.Hp > 0 {
 			DeuxiemeGardien()
 			DieuHadès()
-			BossFightHades(player)
+			BossFightHades(&player)
 			if player.Hp > 0 {
 				VictoirePerso()
 			}

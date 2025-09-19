@@ -118,7 +118,7 @@ func (player *Character) AccessShop() {
 					fmt.Println("\nVous n'avez pas assez d'argent.")
 				} else {
 					player.Money -= miscMap[miscArr[userChoice2-1]] * quantityChoice
-					player.AddInventory(miscArr[userChoice2-1], quantityChoice)
+					// if player.AddInventory(miscArr[userChoice2-1], quantityChoice) {
 					fmt.Printf("\n%s x %d ajouté à votre inventaire !", miscArr[userChoice2-1].Name, quantityChoice)
 					fmt.Printf("\n- %d H. %d restants.", miscMap[miscArr[userChoice2-1]]*quantityChoice, player.Money)
 				}

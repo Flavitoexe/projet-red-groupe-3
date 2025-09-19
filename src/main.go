@@ -7,7 +7,8 @@ func main() {
 	game.Intro()
 	p1.CharacterCreation()
 	// game.DuelRandom(&p1)
-	p1.MainMenu()
+	// p1.MainMenu()
+	game.DeroulementCombat1(p1)
 
 	// firstGuard := game.Enemy{Hp: 100, Name: "Premier Gardien", MaxHp: 100, Damage: 15}
 	// game.FightPremierGardien(&p1, firstGuard)
