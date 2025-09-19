@@ -23,6 +23,7 @@ type Character struct {
 	BowState   int
 	Infight    bool
 	Resurected bool
+	LimitInv   int
 }
 
 type Item struct {
@@ -48,6 +49,7 @@ var class1 Character = Character{
 	Damage:    10,
 	Skill:     []string{"Coup de poing"},
 	Money:     100,
+	LimitInv:  0,
 }
 
 var class2 Character = Character{
@@ -60,6 +62,7 @@ var class2 Character = Character{
 	Damage:    15,
 	Skill:     []string{"Coup de poing"},
 	Money:     100,
+	LimitInv:  0,
 }
 
 var class3 Character = Character{
@@ -72,6 +75,7 @@ var class3 Character = Character{
 	Damage:    5,
 	Skill:     []string{"Coup de poing"},
 	Money:     100,
+	LimitInv:  0,
 }
 
 var class4 Character = Character{
@@ -84,6 +88,7 @@ var class4 Character = Character{
 	Damage:    250,
 	Skill:     []string{"Coup de poing"},
 	Money:     10000,
+	LimitInv:  2,
 }
 
 func (player *Character) classChoice() {
@@ -195,17 +200,48 @@ func readInt(prompt string) int {
 	}
 }
 
-func (player *Character) limitInventory(item Item) {
-	if !(item.Quantity <= 10) {
-		fmt.Println(Red + "Oups, vous ne pouvez pas avoir d'autres objets.\n" + Reset)
-		return
+func (player Character) limitInventory(item Item) bool {
+
+	if item.Quantity > 0 && !(item.Tag == "Cons") {
+		fmt.Println("\nVous avez déjà cet objet.")
+		return true
 	}
+
+	switch player.LimitInv {
+
+	case 0:
+		if item.Tag == "Misc" && (player.Inventory[24].Quantity >= 50 || player.Inventory[25].Quantity >= 50 || player.Inventory[26].Quantity >= 50) {
+			fmt.Printf("\nLimite de %s atteinte (50).\n", item.Name)
+			return true
+		} else if item.Tag == "Cons" && (player.Inventory[20].Quantity >= 10 || player.Inventory[21].Quantity >= 10 || player.Inventory[22].Quantity >= 10 || player.Inventory[23].Quantity >= 10) {
+			fmt.Printf("\nLimite de %s atteinte (10).\n", item.Name)
+			return true
+		}
+		return false
+	case 1:
+		if item.Tag == "Misc" && (player.Inventory[24].Quantity >= 75 || player.Inventory[25].Quantity >= 75 || player.Inventory[26].Quantity >= 75) {
+			fmt.Printf("\nLimite de %s atteinte (75).\n", item.Name)
+			return true
+		} else if item.Tag == "Cons" && (player.Inventory[20].Quantity >= 15 || player.Inventory[21].Quantity >= 15 || player.Inventory[22].Quantity >= 15 || player.Inventory[23].Quantity >= 15) {
+			fmt.Printf("\nLimite de %s atteinte (15).\n", item.Name)
+			return true
+		}
+		return false
+	case 2:
+		if item.Tag == "Misc" && (player.Inventory[24].Quantity >= 100 || player.Inventory[25].Quantity >= 100 || player.Inventory[26].Quantity >= 100) {
+			fmt.Printf("\nLimite de %s atteinte (100).\n", item.Name)
+			return true
+		} else if item.Tag == "Cons" && (player.Inventory[20].Quantity >= 20 || player.Inventory[21].Quantity >= 20 || player.Inventory[22].Quantity >= 20 || player.Inventory[23].Quantity >= 20) {
+			fmt.Printf("\nLimite de %s atteinte (20).\n", item.Name)
+			return true
+		}
+		return false
+	}
+	return false
 }
 
 func (player *Character) AddInventory(item Item, quantity int) {
-	// player.limitInventory(item)
-	if item.Quantity > 0 && !(item.Tag == "Cons") {
-		fmt.Println("Vous avez déjà cet objet.\n")
+	if player.limitInventory(item) {
 		return
 	}
 
@@ -495,7 +531,8 @@ func (player *Character) isDead() {
 	if player.Hp == 0 && !player.Resurected {
 		fmt.Println(Cyan + "\n\nTu es mort, repenses-y à deux fois la prochaine fois.\n" + Reset)
 		fmt.Println(Green + "Tu viens de ressusciter, bonne chance à toi !" + Reset)
-		player.Hp = player.HpMax / 2
+		player.Hp = player.HpMax / 22
+
 		fmt.Printf("Ton nouveau Hp est : %d\n", player.Hp)
 		player.Resurected = true
 	} else if player.Hp == 0 && player.Resurected {

@@ -6,6 +6,7 @@ func main() {
 	p1 := game.Character{}
 	game.Intro()
 	p1.CharacterCreation()
+	// game.DuelRandom(&p1)
 	p1.MainMenu()
 
 	// firstGuard := game.Enemy{Hp: 100, Name: "Premier Gardien", MaxHp: 100, Damage: 15}

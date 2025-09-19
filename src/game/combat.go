@@ -2,6 +2,7 @@ package game
 
 import (
 	"fmt"
+	"math/rand"
 )
 
 func enemyPattern(player *Character, enemy *Enemy, turn int) {
@@ -73,6 +74,41 @@ func TrainingFight(player *Character) {
 		cptTour++
 	}
 
+}
+
+func DuelRandom(player *Character) {
+
+	enemy := Enemy{}
+	randomEnemy := rand.Intn(3)
+
+	switch randomEnemy {
+	case 0:
+		enemy.InitBandit()
+	case 1:
+		enemy.InitGuard()
+	case 2:
+		enemy.InitSuperiorGuard()
+	}
+
+	player.Infight = true
+	fmt.Printf(Bold+"\nVous rencontrez %s et il vous provoque.\n\tDéfoncez le.\n"+Reset, enemy.Name)
+	cptTour := 1
+
+	for player.Hp > 0 && enemy.Hp > 0 && player.Infight {
+
+		fmt.Printf("\n=== Tour %d ===\n", cptTour)
+		fmt.Printf(Cyan+"\nIl vous reste %d/%d point de vies\n"+Reset, player.Hp, player.HpMax)
+		fmt.Printf(Cyan+"Il reste %d/%d point de vies à %s\n"+Reset, enemy.Hp, enemy.MaxHp, enemy.Name)
+		characterTurn(&enemy, player)
+
+		if enemy.Hp > 0 {
+			enemyPattern(player, &enemy, cptTour)
+		}
+
+		player.isDead()
+		enemy.isDead()
+		cptTour++
+	}
 }
 
 func Duel(player *Character, enemy Enemy) {
@@ -147,6 +183,7 @@ func FightDeuxiemeGardien(player *Character, secondGuard Enemy) {
 }
 
 func BossFightArtemis(player *Character, artemis Enemy) {
+	// FightPremierGardien()
 	DieuArtémis()
 	player.Infight = true
 	cptTour := 1
