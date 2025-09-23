@@ -33,10 +33,9 @@ type Item struct {
 }
 
 type Equipment struct {
-	Casque     Item
-	Body       Item
-	Foot       Item
-	IsEquipped bool
+	Casque Item
+	Body   Item
+	Foot   Item
 }
 
 var class1 Character = Character{
@@ -574,84 +573,6 @@ func (player *Character) spellBook() {
 		}
 	}
 }
-
-// func (player Character) MenuForgeron() {
-// 	var valid bool
-// 	for !valid {
-// 		fmt.Println("\n=== Menu Forgeron ===")
-// 		fmt.Println("\t1 - Linothorax du Guerrier d'Olympe")
-// 		fmt.Println("\t2 - Cuirasse de Fer des Hoplites Éternels")
-// 		fmt.Println("\t3 - Égide d'Or d'Hélios")
-// 		fmt.Println("\t0 - Quitter")
-// 		fmt.Println(Blue +"\nQuel set d'armure souhaitez vous faire fabriquer ?\n"+ Reset)
-
-// 		userChoice := readInt("")
-
-// 		switch userChoice {
-// 		case 0:
-// 			player.MainMenu()
-// 			valid = true
-// 		case 1:
-// 			fmt.Println("== Linothorax du Guerrier d'Olympe ==")
-// 			fmt.Println("\t1 - Heaume du Regard de l'Hydre")
-// 			fmt.Printf("\t\t7 Cuirs, 15 H\n")
-// 			fmt.Println("\t2 - Linothorax du Sang de l'Hydre")
-// 			fmt.Printf("\t\t10 Cuirs, 20 H\n")
-// 			fmt.Println("\t3 - Grèves de la Bête Serpentine")
-// 			fmt.Printf("\t\t5 Cuirs, 10 H\n")
-// 			fmt.Println("\t0 - Quitter")
-
-// 			fmt.Println(Blue + "\nQuelle pièce souhaitez vous faire fabriquer ?\n"+ Reset)
-// 			userChoice2 := readInt("")
-// 		}
-
-// 		fmt.Printf("\t 1 - Chapeau de l'aventurier\n")
-// 		fmt.Printf("\t 2 - Tunique de l'aventurier\n")
-// 		fmt.Printf("\t 3 - Bottes de l'aventurier\n")
-// 		fmt.Printf("\t 4 - Inventaire\n")
-// 		fmt.Printf("\t 0 - Quitter\n")
-
-// 		var menuForgeron int
-// 		fmt.Println(Blue + "\nFaites votre choix (0, 1, 2, 3 ou 4): " + Reset)
-// 		fmt.Scan(&menuForgeron)
-
-// 		switch menuForgeron {
-// 		case 1:
-// 			if player.Money >= 5 {
-// 				player.Money -= 5
-// 				player.AddInventory(adventurerCap, 1)
-// 				fmt.Println(Green + "\nYoupi! Le forgeron a fabriqué le chapeau de l'aventurier.\n" + Reset)
-
-// 			} else {
-// 				fmt.Print(Red + "\nOups, vous n'avez pas assez d'argent pour le fabriquer !\n" + Reset)
-// 			}
-// 		case 2:
-// 			if player.Money >= 5 {
-// 				player.Money -= 5
-// 				player.AddInventory(adventurerChest, 1)
-// 				fmt.Println(Green + "\nYoupi! Le forgeron a fabriqué la tunique de l'aventurier.\n" + Reset)
-// 			} else {
-// 				fmt.Print(Red + "\nOups, vous n'avez pas assez d'argent pour le fabriquer !\n" + Reset)
-// 			}
-// 		case 3:
-// 			if player.Money >= 5 {
-// 				player.Money -= 5
-// 				player.AddInventory(adventurerBoots, 1)
-// 				fmt.Println(Green + "\nYoupi! Le forgeron a fabriqué les bottes de l'aventurier.\n" + Reset)
-// 			} else {
-// 				fmt.Print(Red + "\nOups, vous n'avez pas assez d'argent pour le fabriquer !\n" + Reset)
-// 			}
-// 		case 4:
-// 			player.AccesInventory()
-// 		case 0:
-// 			return
-// 		default:
-// 			fmt.Println(Red + "\nChoix invalide, veuillez réessayer !\n" + Reset)
-// 		}
-// 	}
-// }
-
-// func (player Character) IsEquipped()
 
 func (player Character) upgradeInventorySlot() {
 

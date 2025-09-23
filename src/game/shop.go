@@ -276,7 +276,7 @@ func (player *Character) MenuForgeron() {
 
 		case 3:
 			fmt.Println("== Égide d'Or d'Hélios ==")
-			fmt.Println("\t1 - Couronne Solaire d’Hélios")
+			fmt.Println("\t1 - Couronne Solaire d'Hélios")
 			fmt.Printf("\t\t15 Ors, 30 H\n")
 			fmt.Println("\t2 - Égide d'Hélios")
 			fmt.Printf("\t\t20 Ors, 40 H\n")
@@ -331,50 +331,6 @@ func (player *Character) MenuForgeron() {
 					player.AddInventory(goldBoots, 1)
 				}
 			}
-
-			// fmt.Printf("\t 1 - Chapeau de l'aventurier\n")
-			// fmt.Printf("\t 2 - Tunique de l'aventurier\n")
-			// fmt.Printf("\t 3 - Bottes de l'aventurier\n")
-			// fmt.Printf("\t 4 - Inventaire\n")
-			// fmt.Printf("\t 0 - Quitter\n")
-
-			// var menuForgeron int
-			// fmt.Println(Blue + "\nFaites votre choix (0, 1, 2, 3 ou 4): " + Reset)
-			// fmt.Scan(&menuForgeron)
-
-			// switch menuForgeron {
-			// case 1:
-			// 	if player.Money >= 5 {
-			// 		player.Money -= 5
-			// 		player.AddInventory(adventurerCap, 1)
-			// 		fmt.Println(Green + "\nYoupi! Le forgeron a fabriqué le chapeau de l'aventurier.\n" + Reset)
-
-			// 	} else {
-			// 		fmt.Print(Red + "Oups, vous n'avez pas assez d'argent pour le fabriquer !" + Reset)
-			// 	}
-			// case 2:
-			// 	if player.Money >= 5 {
-			// 		player.Money -= 5
-			// 		player.AddInventory(adventurerChest, 1)
-			// 		fmt.Println(Green + "\nYoupi! Le forgeron a fabriqué la tunique de l'aventurier.\n" + Reset)
-			// 	} else {
-			// 		fmt.Print(Red + "Oups, vous n'avez pas assez d'argent pour le fabriquer !" + Reset)
-			// 	}
-			// case 3:
-			// 	if player.Money >= 5 {
-			// 		player.Money -= 5
-			// 		player.AddInventory(adventurerBoots, 1)
-			// 		fmt.Println(Green + "\nYoupi! Le forgeron a fabriqué les bottes de l'aventurier.\n" + Reset)
-			// 	} else {
-			// 		fmt.Print(Red + "Oups, vous n'avez pas assez d'argent pour le fabriquer !" + Reset)
-			// 	}
-			// case 4:
-			// 	player.AccesInventory()
-			// case 0:
-			// 	return
-			// default:
-			// 	fmt.Println(Red + "\nChoix invalide, veuillez réessayer !\n" + Reset)
-			// }
 		}
 	}
 }

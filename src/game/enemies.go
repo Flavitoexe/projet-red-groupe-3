@@ -49,23 +49,28 @@ func (enemy *Enemy) InitHades() {
 	*enemy = Enemy{"Hadès", 400, 400, 60, gold}
 }
 
-func (player *Character) enemyDead(enemy Enemy) {
+func (player *Character) EnemyDead(enemy Enemy) {
 	if enemy.Hp == 0 {
 		fmt.Printf("\nVous avez vaincu %s !", enemy.Name)
 		fmt.Printf("\nVous récoltez : %d !", rand.Intn(10))
+		player.Infight = false
 	}
 }
 
-func (player *Character) guardDead(guard Enemy) {
+func (player *Character) GuardDead(guard Enemy) {
 	if guard.Hp == 0 {
 		fmt.Printf("\nVous avez vaincu %s !", guard.Name)
 		fmt.Printf("\nVous récoltez : %d !", rand.Intn(50-25+1)+25)
+		player.Infight = false
+
 	}
 }
 
-func (player *Character) bossDead(boss Enemy) {
+func (player *Character) BossDead(boss Enemy) {
 	if boss.Hp == 0 {
 		fmt.Printf("\nVous avez vaincu %s !", boss.Name)
 		fmt.Printf("\nVous récoltez : %d !", 100)
+		player.Infight = false
+
 	}
 }

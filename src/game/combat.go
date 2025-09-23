@@ -72,7 +72,7 @@ func TrainingFight(player *Character) {
 		}
 
 		player.isDead()
-		player.enemyDead(enemy)
+		player.EnemyDead(enemy)
 		cptTour++
 	}
 
@@ -106,9 +106,10 @@ func DuelRandom(player *Character) {
 		if enemy.Hp > 0 {
 			enemyPattern(player, &enemy, cptTour)
 		}
-
+		if enemy.Hp <= 0 {
+			player.EnemyDead(enemy)
+		}
 		player.isDead()
-		player.enemyDead(enemy)
 		cptTour++
 	}
 }
@@ -131,7 +132,7 @@ func Duel(player *Character, enemy Enemy) {
 		}
 
 		player.isDead()
-		player.enemyDead(enemy)
+		player.EnemyDead(enemy)
 		cptTour++
 	}
 }
@@ -155,7 +156,7 @@ func FightPremierGardien(player *Character) {
 		}
 
 		player.isDead()
-		player.guardDead(firstGuard)
+		player.GuardDead(firstGuard)
 		cptTour++
 	}
 	if firstGuard.Hp <= 0 {
@@ -184,7 +185,7 @@ func FightDeuxiemeGardien(player *Character) {
 		}
 
 		player.isDead()
-		player.guardDead(secondGuard)
+		player.GuardDead(secondGuard)
 		cptTour++
 	}
 	if secondGuard.Hp <= 0 {
@@ -213,7 +214,7 @@ func BossFightArtemis(player *Character) {
 		}
 
 		player.isDead()
-		player.bossDead(artemis)
+		player.BossDead(artemis)
 		cptTour++
 	}
 	VaincuDieu()
@@ -240,7 +241,7 @@ func BossFightHephaistos(player *Character) {
 		}
 
 		player.isDead()
-		player.bossDead(hephaistos)
+		player.BossDead(hephaistos)
 		cptTour++
 	}
 	VaincuDieu()
@@ -267,7 +268,7 @@ func BossFightAres(player *Character) {
 		}
 
 		player.isDead()
-		player.bossDead(ares)
+		player.BossDead(ares)
 		cptTour++
 
 	}
@@ -295,7 +296,7 @@ func BossFightHades(player *Character) {
 		}
 
 		player.isDead()
-		player.bossDead(hades)
+		player.BossDead(hades)
 		cptTour++
 	}
 	VictoirePerso()
